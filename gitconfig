@@ -1,0 +1,12 @@
+[user]
+	name = Jason S. Jones
+	email = jsjones96@gmail.com
+[apply]
+	whitespace = nowarn
+[color]
+	ui = auto
+[help]
+	autocorrect = 1
+[core]
+	autocrlf = input
+	editor = vim
