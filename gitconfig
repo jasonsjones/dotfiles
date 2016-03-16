@@ -10,3 +10,12 @@
 [core]
 	autocrlf = input
 	editor = vim
+[push]
+	default = simple
+[alias]
+	st = status
+	undo = reset HEAD-1 --mixed
+	amend = commit -a --amend
+	co = checkout
+	ec = config --global -e
+    cm = commit -m

@@ -2,17 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# stuff from kyle wheeler's bashrc file.
-JSJDEBUG=${JSJDEBUG:-no}
-
-function dprint {
-if [[ $JSJDEBUG == yes && $- == *i* ]]; then
-    date "+%H:%M:%S $*"
-    echo $SECONDS $*
-fi
-}
-
-#dprint alive
 
 if [ -r "${HOME}/.bashrc.local.preload" ]; then
     dprint "Loading bashrc preload"
@@ -75,6 +64,8 @@ fi
 #esac
 
 export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
 
 # Comment in the above and uncomment this below for a color prompt
 #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
@@ -105,10 +96,6 @@ fi
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
     eval "`dircolors -b`"
-    alias ls='ls -X --color=auto'
-    alias dir='ls --color=auto --format=vertical'
-    alias grep='grep --color=auto'
-    #alias vdir='ls --color=auto --format=long'
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -137,19 +124,35 @@ echo $(date)
 
 source /home/jsjones/bin/functions
 
+export PATH=$PATH:/home/jsjones/bin:\
+/usr/local/bin:\
+/home/jsjones/bin/SynologyAssistant:\
+/home/jsjones/bin/android-sdk-linux/tools:\
+/home/jsjones/google_appengine:\
+/home/jsjones/dev/android-studio/bin:\
+/home/jsjones/dev/eclipse:\
+/home/jsjones/IDEs/VSCode-linux-x64
 
-export PATH=$PATH:/home/jsjones/bin:/home/jsjones/bin/SynologyAssistant/:/home/jsjones/bin/android-sdk-linux/tools:/usr/local/bin:/home/jsjones/google_appengine
 export MANPATH=$MANPATH:.:/home/jsjones/src/man:
-export TERM="xterm-256color"
+export TERM="screen-256color"
 export EDITOR="vim"
 export PRINTER="PSC-2350-series"
-export DEBFULLNAME="Jason Jones"
-export DEBEMAIL="jsjones96@gmail.com"
 export GIT_EDITOR="vim"
 export LEDGER="~/finances/master_ledger.ldg"
 export LEDGER_PRICE_DB="~/finances/prices.db"
-
+export MYVIMRC="~/.vim/config.vim"
 
 export CLASSPATH=$CLASSPATH:~/src/algs4/stdlib.jar:~/src/algs4/algs4.jar
+export JAVA_HOME="/opt/java/jdk1.7.0_67/"
+
 test -r ~/src/algs4/bin/config.sh && source ~/src/algs4/bin/config.sh
 
+test -r ~/bin/z.sh && source ~/bin/z.sh
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# added by travis gem
+[ -f /home/jsjones/.travis/travis.sh ] && source /home/jsjones/.travis/travis.sh
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
