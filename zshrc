@@ -58,6 +58,9 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$HOME/blt
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.zsh_aliases
+if [ -f $HOME/.zsh_private_aliases ]; then
+    source $HOME/.zsh_private_aliases
+fi
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8

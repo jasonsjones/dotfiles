@@ -8,8 +8,6 @@ alias cfb="ledger bal checking liabilities:mastercard \
           liabilities:visa bank:savings assets:cash liabilities:'wells fargo' \
           Assets:Reimbursement:Home:Fence"
 
-alias p4login='p4 login -a <<< "<p4passwordhere>" && p4 login -s'
-
 alias wsl='ssh jasonjones-wsl'
 
 alias dckrstop='docker stop $(docker ps -aq)'
