@@ -1,0 +1,21 @@
+#vim: ft=sh
+
+alias c="clear"
+alias ccb="ledger -c bal checking liabilities:mastercard \
+          liabilities:visa bank:savings assets:cash liabilities:'wells fargo' \
+          Assets:Reimbursement:Home:Fence"
+alias cfb="ledger bal checking liabilities:mastercard \
+          liabilities:visa bank:savings assets:cash liabilities:'wells fargo' \
+          Assets:Reimbursement:Home:Fence"
+
+alias p4login='p4 login -a <<< "<p4passwordhere>" && p4 login -s'
+
+alias wsl='ssh jasonjones-wsl'
+
+alias dckrstop='docker stop $(docker ps -aq)'
+alias dckrrm='docker rm $(docker ps -aq)'
+
+alias listglobalnpmpackages='npm list -g --depth=0'
+alias ic='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
+alias sync-finances='rsync -avzh finances/ ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/finances/'
+
