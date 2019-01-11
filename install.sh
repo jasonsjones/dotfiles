@@ -10,10 +10,11 @@ if [[ $OSTYPE == darwin* ]]; then
         echo "$HOME/.vim directory already exists, not cloning any configs from github"
     fi
     echo "Copying each dotfile to its respective location for MacOS"
-    echo "ln -s $PWD/vimrc ~/.vimrc"
-    ln -s $PWD/vimrc ~/.vimrc
     # add other macos specific symlinks here, e.g:
-    #ln -s $PWD/zshrc ~/.zshrc
+    # uncomment to install
+
+    #ln -s $PWD/vimrc ~/.vimrc
+    #ln -s $PWD/zshrc-laptop ~/.zshrc
     #ln -s $PWD/zsh_aliases ~/.zsh_aliases
     #ln -s $PWD/profile ~/.profile
     #ln -s $PWD/bash_profile ~/.bash_profile
