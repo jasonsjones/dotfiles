@@ -17,3 +17,5 @@ alias listglobalnpmpackages='npm list -g --depth=0'
 alias ic='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
 alias sync-finances='rsync -avzh finances/ ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/finances/'
 
+alias squashpr="git rebase -i HEAD~\$(git rev-list master.. --count)"
+
