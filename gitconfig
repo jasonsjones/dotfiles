@@ -12,3 +12,8 @@
 	editor = code --wait --new-window
 [push]
 	default = simple
+[pager]
+	branch = false
+	config = false
+[credential]
+	helper = cache --timeout=86400
