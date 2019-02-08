@@ -88,9 +88,9 @@ alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="atom ~/.oh-my-zsh"
 
 # Personal Exports
-export P4PORT=ssl:p4proxy.seattle.soma.salesforce.com:1999
+export P4PORT=ssl:p4proxy.soma.salesforce.com:1999
 export P4USER=jasonjones
-export P4CLIENT=jasonjones-ltm-blt
+export P4CLIENT=jasonjones-ltm1-blt
 export LEDGER="$HOME/finances/master_ledger.ldg"
 export GIT_EDITOR="code --wait --new-window"
 
