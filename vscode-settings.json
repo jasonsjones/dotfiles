@@ -1,0 +1,61 @@
+{
+    "editor.cursorStyle": "block",
+    "editor.formatOnSave": true,
+    // Keybinding overrides to use for insert mode.
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["k", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    // Controls how the editor should render whitespace characters, posibilties are 'none', 'boundary', and 'all'. The 'boundary' option does not render single spaces between words.
+    "editor.renderWhitespace": "boundary",
+    // Controls if the editor should automatically format the pasted content. A formatter must be available and the formatter should be able to format a range in a document.
+    "editor.formatOnPaste": true,
+    // Configure file associations to languages (e.g. "*.extension": "html"). These have precedence over the default associations of the languages installed.
+    "files.associations": {
+        "*bashrc": "shellscript",
+        "bash*": "shellscript",
+        "*profile*": "shellscript",
+        "*zshrc": "shellscript",
+        "zsh_aliases*": "shellscript",
+        "*.js-*": "javascript",
+        "vscode-settings.json": "jsonc",
+        "*.ldg": "ledger"
+    },
+    "window.zoomLevel": 0,
+    "prettier.tabWidth": 4,
+    "prettier.printWidth": 100,
+    "prettier.singleQuote": true,
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.fontSize": 12,
+    "terminal.integrated.fontSize": 12,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "workbench.iconTheme": "vscode-icons",
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.trimTrailingWhitespace": true,
+    "vim.foldfix": true,
+    "prettier.proseWrap": "always",
+    "markdown.preview.breaks": true,
+    "[markdown]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wrappingIndent": "same",
+        "editor.wordWrapColumn": 100,
+        "editor.quickSuggestions": false,
+        "files.trimTrailingWhitespace": false
+    },
+    "workbench.colorTheme": "One Dark Pro"
+}
