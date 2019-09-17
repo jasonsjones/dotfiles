@@ -92,7 +92,13 @@ fi
 # Personal Exports
 export M2_HOME=$HOME/blt/tools/maven/apache-maven-3.5.4
 export JAVA_HOME=$HOME/blt/tools/Darwin/jdk/openjdk1.8.0_212_x64
-export P4PORT=ssl:p4proxy.soma.salesforce.com:1999
+
+if [[ $HOST == *"wsm"* ]]; then
+  export P4PORT=ssl:p4proxy.seattle.soma.salesforce.com:1999
+else
+  export P4PORT=ssl:p4proxy.soma.salesforce.com:1999
+fi
+
 export P4USER=jasonjones
 export P4CLIENT=jasonjones-ltm1-blt
 export LEDGER="$HOME/finances/master_ledger.ldg"
