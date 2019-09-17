@@ -14,7 +14,7 @@ if [[ $OSTYPE == darwin* ]]; then
     # uncomment to install
 
     #ln -s $PWD/vimrc ~/.vimrc
-    #ln -s $PWD/zshrc-laptop ~/.zshrc
+    #ln -s $PWD/zshrc ~/.zshrc
     #ln -s $PWD/zsh_aliases ~/.zsh_aliases
     #ln -s $PWD/profile ~/.profile
     #ln -s $PWD/bash_profile ~/.bash_profile

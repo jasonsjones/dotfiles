@@ -5,7 +5,7 @@ export ZSH=/Users/jasonjones/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="spaceship"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -53,14 +53,15 @@ plugins=(git node yarn zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$HOME/blt:$HOME/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$HOME/blt:$HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-source $ZSH/oh-my-zsh.sh
-source $HOME/.zsh_aliases
-if [ -f $HOME/.zsh_private_aliases ]; then
-    source $HOME/.zsh_private_aliases
+
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
+
+source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -82,12 +83,15 @@ fi
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-alias zshconfig="vim ~/.zshrc"
-# alias ohmyzsh="atom ~/.oh-my-zsh"
+
+source $HOME/.zsh_aliases
+if [ -f $HOME/.zsh_aliases_private ]; then
+    source $HOME/.zsh_aliases_private
+fi
 
 # Personal Exports
+export M2_HOME=$HOME/blt/tools/maven/apache-maven-3.5.4
+export JAVA_HOME=$HOME/blt/tools/Darwin/jdk/openjdk1.8.0_212_x64
 export P4PORT=ssl:p4proxy.soma.salesforce.com:1999
 export P4USER=jasonjones
 export P4CLIENT=jasonjones-ltm1-blt
@@ -104,3 +108,4 @@ export BLUE='\033[00;34m'
 export PURPLE='\033[00;35m'
 export CYAN='\033[00;36m'
 export LIGHTGRAY='\033[00;37m'
+
