@@ -1,11 +1,10 @@
 module.exports = {
     config: {
         // default font size in pixels for all tabs
-        fontSize: 12,
+        fontSize: 11,
 
         // font family with optional fallbacks
-        fontFamily:
-            '"Fira Code", "Meslo LG S for Powerline", Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
+        fontFamily: '"Fira Code", "Meslo LG S for Powerline", "Lucida Console", monospace',
 
         // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
         cursorColor: 'rgba(248,28,229,0.75)',
@@ -36,7 +35,7 @@ module.exports = {
         termCSS: '',
 
         // custom padding (css format, i.e.: `top right bottom left`)
-        padding: '12px 14px',
+        padding: ' 12px 12px 20px 12px',
 
         // the full list. if you're going to provide the full color palette,
         // including the 6 x 6 color cubes and the grayscale map, just provide
