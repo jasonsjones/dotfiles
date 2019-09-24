@@ -103,6 +103,8 @@ export P4USER=jasonjones
 export P4CLIENT=jasonjones-ltm1-blt
 export LEDGER="$HOME/finances/master_ledger.ldg"
 export GIT_EDITOR="code --wait --new-window"
+export GPG_TTY=$(tty)
+export SPACESHIP_PACKAGE_SYMBOL="📦  "
 
 # colors
 export RESTORE='\033[0m'
@@ -114,4 +116,3 @@ export BLUE='\033[00;34m'
 export PURPLE='\033[00;35m'
 export CYAN='\033[00;36m'
 export LIGHTGRAY='\033[00;37m'
-
