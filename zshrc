@@ -53,6 +53,9 @@ plugins=(git node yarn zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
+export M2_HOME=$HOME/blt/tools/maven/apache-maven-3.5.4
+export JAVA_HOME=$HOME/blt/tools/Darwin/jdk/openjdk1.8.0_212_x64
+
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$HOME/blt:$HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -90,8 +93,6 @@ if [ -f $HOME/.zsh_aliases_private ]; then
 fi
 
 # Personal Exports
-export M2_HOME=$HOME/blt/tools/maven/apache-maven-3.5.4
-export JAVA_HOME=$HOME/blt/tools/Darwin/jdk/openjdk1.8.0_212_x64
 
 if [[ $HOST == *"wsm"* ]]; then
   export P4PORT=ssl:p4proxy.seattle.soma.salesforce.com:1999
