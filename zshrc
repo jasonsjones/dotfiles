@@ -49,7 +49,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node yarn zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git node yarn docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
@@ -106,6 +106,7 @@ export LEDGER="$HOME/finances/master_ledger.ldg"
 export GIT_EDITOR="code --wait --new-window"
 export GPG_TTY=$(tty)
 export SPACESHIP_PACKAGE_SYMBOL="📦  "
+export SPACESHIP_DOCKER_SYMBOL="🐳  "
 
 # colors
 export RESTORE='\033[0m'
