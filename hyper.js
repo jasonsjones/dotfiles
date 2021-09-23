@@ -63,10 +63,10 @@ module.exports = {
         // if left empty, your system's login shell will be used by default
         shell: '',
         activeTab: '🚀',
-        hyperline: {
-            plugins: ['hostname', 'ip', 'memory']
-        },
-        webGLRenderer: false
+        webGLRenderer: false,
+        // hyperline: {
+        //     plugins: ['hostname', 'ip', 'memory']
+        // },
 
         // for advanced config flags please refer to https://hyperterm.org/#cfg
     },
@@ -77,14 +77,17 @@ module.exports = {
     //   `hyperpower`
     //   `@company/project`
     //   `project#1.0.1`
+    /*
+        old plugins:
+            'hyper-solarized-dark', 'hyper-snazzy', "hyperterm-monokai"
+            'hyper-blink',
+            'hyper-search',
+            'hyperline', // caused much lag in typing in hyper v3.1.x
+            'hypercwd',
+    */
     plugins: [
-        // 'hyper-solarized-dark', 'hyper-snazzy', "hyperterm-monokai"
-        'hyper-blink',
         'hyper-font-ligatures',
-        'hyper-search',
-        'hyperline',
         'hyper-active-tab',
-        'hypercwd',
         'hyper-one-dark'
     ],
 
