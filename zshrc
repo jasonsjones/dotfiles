@@ -1,3 +1,4 @@
+source /Users/jasonjones/.bootstrap_rc
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/jasonjones/.oh-my-zsh
 
@@ -49,7 +50,7 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node yarn docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git gitfast node yarn docker docker-compose zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
@@ -100,6 +101,7 @@ else
   export P4PORT=ssl:p4proxy.soma.salesforce.com:1999
 fi
 
+export NODE_EXTRA_CA_CERTS=$HOME/certificates/sfdx_bundle.pem
 export P4USER=jasonjones
 export P4CLIENT=jasonjones-ltm1-blt
 export LEDGER="$HOME/finances/master_ledger.ldg"
