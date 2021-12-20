@@ -109,6 +109,8 @@ export GIT_EDITOR="code --wait --new-window"
 export GPG_TTY=$(tty)
 export SPACESHIP_PACKAGE_SYMBOL="📦  "
 export SPACESHIP_DOCKER_SYMBOL="🐳  "
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 # colors
 export RESTORE='\033[0m'

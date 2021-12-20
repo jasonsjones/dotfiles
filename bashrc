@@ -156,3 +156,5 @@ export PATH="/usr/local/heroku/bin:$PATH"
 [ -f /home/jsjones/.travis/travis.sh ] && source /home/jsjones/.travis/travis.sh
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
