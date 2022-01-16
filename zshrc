@@ -1,4 +1,3 @@
-source /Users/jasonjones/.bootstrap_rc
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/jasonjones/.oh-my-zsh
 
@@ -61,8 +60,6 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export M2_HOME=$HOME/blt/tools/maven/apache-maven-3.5.4
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$HOME/blt:$HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
-
 
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
