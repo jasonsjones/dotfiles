@@ -1,17 +1,29 @@
 #!/bin/sh
 
-echo $PWD
+VIM_HOME=$HOME/.vim
+NVIM_HOME=$HOME/.config/nvim
+ZSH_CUSTOM_DIR=$ZSH/custom
 
-if [[ $OSTYPE == darwin* ]]; then
-    if [ ! -d $HOME/.vim ]; then
-        echo "Cloning vim config files from github..."
-        git clone git@github.com:jasonsjones/vim-config.git ~/.vim
-    else
-        echo "$HOME/.vim directory already exists, not cloning any configs from github"
-    fi
-    echo "Copying each dotfile to its respective location for MacOS"
-    # add other macos specific symlinks here, e.g:
-    # uncomment to install
+if [ ! -d $VIM_HOME ]; then
+    echo "Cloning vim config files from github..."
+    git clone git@github.com:jasonsjones/vim-config.git $VIM_HOME
+else
+    echo "$VIM_HOME directory already exists, not cloning any configs from github"
+fi
+
+if [ ! -d $NVIM_HOME ]; then
+    echo "Cloning neovim config files from github..."
+    git clone git@github.com:jasonsjones/neovim-config.git $NVIM_HOME
+else
+    echo "$NVIM_HOME directory already exists, not cloning any configs from github"
+fi
+echo "\nCopying each dotfile to its respective location"
+
+# add other macos specific symlinks here, e.g:
+# uncomment to install
+
+ln -sf $PWD/zshrc $HOME/.zshrc
+ln -sf $PWD/aliases.zsh $ZSH_CUSTOM_DIR/aliases.zsh
 
     #ln -s $PWD/vimrc ~/.vimrc
     #ln -s $PWD/zshrc ~/.zshrc
@@ -23,9 +35,7 @@ if [[ $OSTYPE == darwin* ]]; then
     #ln -s $PWD/hyper.js ~/.hyper.js
     #ln -s $PWD/tmux.conf ~/.tmux.conf
     #ln -s $PWD/synery-client.conf ~/.synergy.conf
-elif [[ $OSTYPE == linux* ]]; then
-    echo "Copying each dotfile to its respective location for Linux"
-else
-    echo "This operating system is not supported"
-    exit 1
-fi
+
+echo "\nNeed to source ~/.zshrc. Run:"
+echo "\n   \$ source ~/.zshrc"
+
