@@ -25,3 +25,6 @@ alias code="code --new-window"
 alias notes="code --new-window ~/Documents/notes"
 alias scratchpad="code --new-window ~/Documents/notes ~/Documents/notes/scratch.md"
 
+alias corepids="corecli core:ps | grep UP | awk '{print \$6}' | tr '\n' ' '"
+
+alias glon='function _glon() { git log --oneline -n $1 }; _glon'
