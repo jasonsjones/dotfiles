@@ -6,7 +6,7 @@ export ZSH=/Users/jasonjones/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
-if [ -d $ZSH_CUSTOM/themes/spaceship-prompt ]; then
+if [ -d $ZSH/custom/themes/spaceship-prompt ]; then
     ZSH_THEME="spaceship"
 fi
 
@@ -56,11 +56,6 @@ plugins=(git gitfast node yarn docker docker-compose zsh-autosuggestions zsh-syn
 
 # User configuration
 
-export JAVA_HOME=$(/usr/libexec/java_home)
-export M2_HOME=$HOME/blt/tools/maven/apache-maven-3.5.4
-
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$HOME/blt:$HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin"
-
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
@@ -82,26 +77,4 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 
 source /Users/jasonjones/.bootstrap_rc
-
-# Personal Exports
-export NODE_EXTRA_CA_CERTS=$HOME/certificates/sfdx_bundle.pem
-export LEDGER="$HOME/finances/master_ledger.ldg"
-#export GIT_EDITOR="code --wait --new-window"
-export EDITOR='nvim'
-export GPG_TTY=$(tty)
-export SPACESHIP_PACKAGE_SYMBOL="📦  "
-export SPACESHIP_DOCKER_SYMBOL="🐳  "
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-# colors
-export RESTORE='\033[0m'
-
-export RED='\033[00;31m'
-export GREEN='\033[00;32m'
-export YELLOW='\033[00;33m'
-export BLUE='\033[00;34m'
-export PURPLE='\033[00;35m'
-export CYAN='\033[00;36m'
-export LIGHTGRAY='\033[00;37m'
 
