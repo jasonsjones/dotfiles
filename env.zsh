@@ -4,7 +4,13 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export M2_HOME=$HOME/blt/tools/maven/apache-maven-3.5.4
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$HOME/blt:$HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin"
 
-export NODE_EXTRA_CA_CERTS=$HOME/certificates/sfdx_bundle.pem
+if [[ -f "$HOME/certificates/sfdx_bundle.pem" ]]
+then
+    export NODE_EXTRA_CA_CERTS=$HOME/certificates/sfdx_bundle.pem
+else
+    export NODE_EXTRA_CA_CERTS=$HOME/.tls/tempCA/sfdc-dev-root.crt
+fi
+
 export LEDGER="$HOME/finances/master_ledger.ldg"
 export EDITOR='nvim'
 export GPG_TTY=$(tty)
