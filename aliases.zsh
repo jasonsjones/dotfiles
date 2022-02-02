@@ -1,4 +1,5 @@
 alias c="clear"
+alias cat="bat --theme=TwoDark"
 alias setinternalregistry='npm config set registry https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/'
 alias setpublicregistry='npm config set registry https://registry.npmjs.org/'
 
