@@ -16,7 +16,7 @@ fi
 
 echo "\nCopying each dotfile to its respective location"
 
-ln -sf $PWD/zshrc $HOME/.zshrc
+ln -sf $PWD/zshrc.zsh $HOME/.zshrc
 ln -sf $PWD/aliases.zsh $ZSH_CUSTOM_DIR/aliases.zsh
 ln -sf $PWD/env.zsh $ZSH_CUSTOM_DIR/env.zsh
 ln -sf $PWD/tmux.conf.local $HOME/.tmux.conf.local
