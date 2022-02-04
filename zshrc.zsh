@@ -76,5 +76,7 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 
-source /Users/jasonjones/.bootstrap_rc
+if [[ -f "$HOME/.bootstrap_rc" ]]; then
+    source /Users/jasonjones/.bootstrap_rc
+fi
 
