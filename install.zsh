@@ -1,5 +1,3 @@
-#!/bin/sh
-
 VIM_HOME=$HOME/.vim
 NVIM_HOME=$HOME/.config/nvim
 ZSH_CUSTOM_DIR=$ZSH/custom
