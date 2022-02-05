@@ -3,7 +3,7 @@
 export JAVA_HOME=$(/usr/libexec/java_home)
 export M2_HOME=$HOME/blt/tools/maven/apache-maven-3.5.4
 export VOLTA_HOME="$HOME/.volta"
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$HOME/blt:$HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$VOLTA_HOME/bin"
+export PATH="/usr/local/opt/node@16/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$HOME/blt:$HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$VOLTA_HOME/bin"
 
 if [[ -f "$HOME/certificates/sfdx_bundle.pem" ]]
 then
