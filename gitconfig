@@ -1,5 +1,5 @@
 [user]
-	name = Jason S. Jones
+	name = Jason Jones
 	email = jsjones96@gmail.com
 [apply]
 	whitespace = nowarn
@@ -9,12 +9,9 @@
 	autocorrect = 1
 [core]
 	autocrlf = input
-	editor = code --wait --new-window
+    pager = delta --dark --line-numbers --side-by-side
 [push]
 	default = simple
-[pager]
-	branch = false
-	config = false
 [credential]
 	helper = cache --timeout=86400
 [init]
