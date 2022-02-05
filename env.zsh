@@ -8,7 +8,8 @@ export PATH="/usr/local/opt/node@16/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/
 if [[ -f "$HOME/certificates/sfdx_bundle.pem" ]]
 then
     export NODE_EXTRA_CA_CERTS=$HOME/certificates/sfdx_bundle.pem
-else
+elif [[ -f "$HOME/.tls/tempCA/sfdc-dev-root.crt" ]]
+then
     export NODE_EXTRA_CA_CERTS=$HOME/.tls/tempCA/sfdc-dev-root.crt
 fi
 
