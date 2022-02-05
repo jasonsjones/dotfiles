@@ -13,11 +13,12 @@ if [ ! -d $NVIM_HOME ]; then
 fi
 
 echo "\nCopying each dotfile to its respective location"
+echo "Script directory..."
 
-ln -sf $PWD/zshrc.zsh $HOME/.zshrc
-ln -sf $PWD/aliases.zsh $ZSH_CUSTOM_DIR/aliases.zsh
-ln -sf $PWD/env.zsh $ZSH_CUSTOM_DIR/env.zsh
-ln -sf $PWD/tmux.conf.local $HOME/.tmux.conf.local
+ln -sf $HOME/dotfiles/zshrc.zsh $HOME/.zshrc
+ln -sf $HOME/dotfiles/aliases.zsh $ZSH_CUSTOM_DIR/aliases.zsh
+ln -sf $HOME/dotfiles/env.zsh $ZSH_CUSTOM_DIR/env.zsh
+ln -sf $HOME/dotfiles/tmux.conf.local $HOME/.tmux.conf.local
 
 #ln -s $PWD/vimrc ~/.vimrc
 #ln -s $PWD/zshrc ~/.zshrc
