@@ -18,6 +18,12 @@ ln -sf $PWD/tmux.conf.local $HOME/.tmux.conf.local
 ln -sf $PWD/gitconfig $HOME/.gitconfig
 ln -sf $PWD/ideavimrc $HOME/.ideavimrc
 
+if [[ ! -d $HOME/.config/alacritty ]]; then
+    mkdir -p $HOME/.config/alacritty
+fi
+ln -sf $PWD/alacritty.yml $HOME/.config/alacritty/
+
+
 echo "\nNeed to source ~/.zshrc. Run:"
 echo "\n   \$ source ~/.zshrc"
 
