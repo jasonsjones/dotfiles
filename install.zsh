@@ -16,6 +16,7 @@ ln -sf $PWD/aliases.zsh $ZSH_CUSTOM_DIR/aliases.zsh
 ln -sf $PWD/env.zsh $ZSH_CUSTOM_DIR/env.zsh
 ln -sf $PWD/tmux.conf.local $HOME/.tmux.conf.local
 ln -sf $PWD/gitconfig $HOME/.gitconfig
+ln -sf $PWD/ideavimrc $HOME/.ideavimrc
 
 echo "\nNeed to source ~/.zshrc. Run:"
 echo "\n   \$ source ~/.zshrc"
