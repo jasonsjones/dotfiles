@@ -16,8 +16,8 @@ fi
 export LEDGER="$HOME/finances/master_ledger.ldg"
 export EDITOR='nvim'
 export GPG_TTY=$(tty)
-export SPACESHIP_PACKAGE_SYMBOL="📦  "
-export SPACESHIP_DOCKER_SYMBOL="🐳  "
+export SPACESHIP_PACKAGE_SYMBOL="📦 "
+export SPACESHIP_DOCKER_SYMBOL="🐳 "
 
 # colors
 export RESTORE='\033[0m'
