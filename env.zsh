@@ -18,6 +18,7 @@ export EDITOR='nvim'
 export GPG_TTY=$(tty)
 export SPACESHIP_PACKAGE_SYMBOL="📦 "
 export SPACESHIP_DOCKER_SYMBOL="🐳 "
+export SPACESHIP_MAVEN_SYMBOL="🪶 "
 
 # colors
 export RESTORE='\033[0m'
