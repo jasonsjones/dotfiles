@@ -19,6 +19,8 @@ export GPG_TTY=$(tty)
 export SPACESHIP_PACKAGE_SYMBOL="📦 "
 export SPACESHIP_DOCKER_SYMBOL="🐳 "
 export SPACESHIP_MAVEN_SYMBOL="🪶 "
+export ZVM_VI_INSERT_ESCAPE_BINDKEY=kj
+export ZVM_VI_VISUAL_ESCAPE_BINDKEY=kj
 
 # colors
 export RESTORE='\033[0m'
