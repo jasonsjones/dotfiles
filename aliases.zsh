@@ -7,7 +7,7 @@ alias setinternalregistry="npm config set registry https://nexus.soma.salesforce
 alias setpublicregistry="npm config set registry https://registry.npmjs.org/"
 
 alias corepids="corecli core:ps | grep UP | awk '{print \$6}' | tr '\n' ' '"
-alias glon="function _glon() { git log --oneline -n $1 }; _glon"
+alias glon='function _glon() { git log --oneline -n $1 }; _glon'
 
 # Old aliases
 #alias zshconfig="code --new-window ~/.zshrc"
