@@ -13,7 +13,7 @@ then
     export NODE_EXTRA_CA_CERTS=$HOME/.tls/tempCA/sfdc-dev-root.crt
 fi
 
-export LEDGER="$HOME/finances/master_ledger.ldg"
+export LEDGER="$HOME/ledgers/master_ledger.ldg"
 export EDITOR='nvim'
 export GPG_TTY=$(tty)
 export SPACESHIP_PACKAGE_SYMBOL="📦 "
