@@ -10,7 +10,6 @@ link_dotfiles () {
     cd $BASEDIR
 
     ln -sf $PWD/zshrc.zsh $HOME/.zshrc
-    ln -sf $PWD/zprofile.zsh $HOME/.zprofile
     ln -sf $PWD/aliases.zsh $ZSH_CUSTOM_DIR/aliases.zsh
     ln -sf $PWD/env.zsh $ZSH_CUSTOM_DIR/env.zsh
     ln -sf $PWD/tmux.conf.local $HOME/.tmux.conf.local
