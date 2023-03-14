@@ -22,6 +22,11 @@ link_dotfiles () {
     fi
     ln -sf $PWD/alacritty.yml $HOME/.config/alacritty/
 
+    if [[ ! -d $HOME/.config/zellij ]]; then
+        mkdir -p $HOME/.config/zellij
+    fi
+    ln -sf $PWD/zellij/config.kdl $HOME/.config/zellij/
+
     echo "\nNeed to source ~/.zshrc. Run:"
     echo "\n   \$ source ~/.zshrc"
 
