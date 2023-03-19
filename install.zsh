@@ -25,7 +25,8 @@ link_dotfiles () {
     if [[ ! -d $HOME/.config/zellij ]]; then
         mkdir -p $HOME/.config/zellij
     fi
-    ln -sf $PWD/zellij/config.kdl $HOME/.config/zellij/
+    ln -sf $PWD/zellij/config.kdl $HOME/.config/zellij
+    ln -sf $PWD/zellij/layouts $HOME/.config/zellij
 
     echo "\nNeed to source ~/.zshrc. Run:"
     echo "\n   \$ source ~/.zshrc"
