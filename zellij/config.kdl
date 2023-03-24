@@ -1,14 +1,3 @@
-keybinds {
-    move {
-        unbind "Ctrl h"
-        bind "Ctrl m" { SwitchToMode "Normal"; }
-    }
-
-    shared_except "move" "locked" {
-        unbind "Ctrl h"
-        bind "Ctrl m" { SwitchToMode "Move"; }
-    }
-}
 
 themes {
     nord {
