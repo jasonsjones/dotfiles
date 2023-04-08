@@ -52,7 +52,7 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git gitfast node yarn docker docker-compose zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git gitfast node yarn docker docker-compose zsh-vi-mode zsh-autosuggestions zsh-syntax-highlighting z)
 
 # User configuration
 
@@ -79,3 +79,4 @@ source $ZSH/oh-my-zsh.sh
 if [[ -f "$HOME/.bootstrap_rc" ]]; then
     source /Users/jasonjones/.bootstrap_rc
 fi
+
