@@ -20,7 +20,7 @@ link_dotfiles () {
     if [[ ! -d $HOME/.config/alacritty ]]; then
         mkdir -p $HOME/.config/alacritty
     fi
-    ln -sf $PWD/alacritty.yml $HOME/.config/alacritty/
+    ln -sf $PWD/config/alacritty/alacritty.yml $HOME/.config/alacritty/
 
     if [[ ! -d $HOME/.config/zellij ]]; then
         mkdir -p $HOME/.config/zellij
