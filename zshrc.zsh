@@ -80,3 +80,21 @@ if [[ -f "$HOME/.bootstrap_rc" ]]; then
     source /Users/jasonjones/.bootstrap_rc
 fi
 
+# Put all configuration to construct $PATH here since this is the last config to be loaded when
+# an interactive shell is created.
+# Ref: https://0xmachos.com/2021-05-13-zsh-path-macos/
+#
+# Personal Exports
+export JAVA_HOME=$(/usr/libexec/java_home)
+export M2_HOME=$HOME/blt/tools/maven/apache-maven-3.5.4
+export VOLTA_HOME="$HOME/.volta"
+COMMON_PATH=/opt/X11/bin:$HOME/blt:$HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$VOLTA_HOME/bin
+
+if [[ $(uname -m) == 'arm64' ]]; then
+    # configure homebrew dir for M1 mac first to override system binaries
+    export PATH=/opt/homebrew/bin:$COMMON_PATH:$PATH
+else
+    # configure homebrew dir for intel mac first to override system binaries
+    export PATH=/usr/local/bin:$COMMON_PATH:$PATH
+fi
+
