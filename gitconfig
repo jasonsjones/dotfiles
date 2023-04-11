@@ -18,3 +18,5 @@
 	defaultBranch = main
 [branch "main"]
 	rebase = true
+[trace2]
+	maxFiles = 800
