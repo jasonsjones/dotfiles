@@ -90,9 +90,13 @@ export M2_HOME=$HOME/blt/tools/maven/apache-maven-3.5.4
 export VOLTA_HOME="$HOME/.volta"
 COMMON_PATH=/opt/X11/bin:$HOME/blt:$HOME/bin:$M2_HOME/bin:$JAVA_HOME/bin:$VOLTA_HOME/bin
 
-if [[ $(uname -m) == 'arm64' ]]; then
+# Update env vars whether or not we're runing on the mac studio (M1) or MBP
+if [[ $(hostname -s) == *wsm* ]]; then
     # configure homebrew dir for M1 mac first to override system binaries
     export PATH=/opt/homebrew/bin:$COMMON_PATH:$PATH
+
+    # configure CORE directory to point to core-on-git when running on mac studio
+    export CODE=$HOME/projects/git-core/core-public
 else
     # configure homebrew dir for intel mac first to override system binaries
     export PATH=/usr/local/bin:$COMMON_PATH:$PATH
