@@ -25,20 +25,21 @@ link_dotfiles () {
     if [[ ! -d $HOME/.config/zellij ]]; then
         mkdir -p $HOME/.config/zellij
     fi
+
     ln -sf $PWD/config/zellij/config.kdl $HOME/.config/zellij
     ln -sf $PWD/config/zellij/layouts $HOME/.config/zellij
+
+    if [[ ! -d $HOME/.config/nvim ]]; then
+        mkdir -p $HOME/.config/nvim
+    fi
+
+    ln -sf $PWD/config/nvim $HOME/.config/nvim
 
     echo "\nNeed to source ~/.zshrc. Run:"
     echo "\n   \$ source ~/.zshrc"
 
     cd -
 }
-
-if [[ ! -d $NVIM_HOME ]]; then
-    echo "Neovim config files not installed.  To install neovim config, run:"
-    echo "\n   \$  git clone git@github.com:jasonsjones/neovim-config.git $NVIM_HOME"
-fi
-
 
 echo "Run 'link_dotfiles' to symlink all dotfiles to the correct spot...\n"
 
