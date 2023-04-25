@@ -1,8 +1,5 @@
 local opts = { silent = true }
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Remap space a leader key
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", opts)
 
