@@ -1,6 +1,6 @@
 return {
+    -- Colorscheme
     {
-        -- Colorscheme
         "shaunsingh/nord.nvim",
         lazy = false,
         priority = 1000,
@@ -19,5 +19,39 @@ return {
 
             require("nord").set()
         end
-    }
+    },
+
+    -- Updated statusline
+    {
+        "nvim-lualine/lualine.nvim",
+        config = function()
+            require("lualine").setup({
+                options = {
+                    icons_enabled = false,
+                    theme = "nord",
+                    component_separators = "|",
+                    section_separators = ""
+                }
+            })
+        end
+    },
+
+    -- Git
+    {
+        "lewis6991/gitsigns.nvim",
+        config = function ()
+            require("gitsigns").setup({ })
+        end
+    },
+
+    -- Fuzzy Finder (files, lsp, etc)
+    {
+        "nvim-telescope/telescope.nvim",
+        branch = "0.1.x",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function ()
+            require("config.telescope")
+        end
+    },
 }
+
