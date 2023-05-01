@@ -96,7 +96,7 @@ if [[ $(hostname -s) == *wsm* ]]; then
     export PATH=/opt/homebrew/bin:$COMMON_PATH:$PATH
 
     # configure CORE directory to point to core-on-git when running on mac studio
-    export CODE=$HOME/projects/git-core/core-public
+    export CORE=$HOME/projects/git-core/core-public
 else
     # configure homebrew dir for intel mac first to override system binaries
     export PATH=/usr/local/bin:$COMMON_PATH:$PATH
