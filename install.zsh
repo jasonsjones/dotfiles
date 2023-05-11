@@ -41,5 +41,20 @@ link_dotfiles () {
     cd -
 }
 
-echo "Run 'link_dotfiles' to symlink all dotfiles to the correct spot...\n"
+link_warp_config () {
+    cd $BASEDIR
+
+    if [[ ! -d $HOME/.warp ]]; then
+        echo "$HOME/.warp does not exist; creating..."
+        mkdir -p $HOME/.warp
+    fi
+
+    echo "Linking warp config..."
+    ln -sf $PWD/warp/* $HOME/.warp/
+
+    cd -
+}
+
+echo "Run 'link_dotfiles' to symlink all dotfiles to the correct spot..."
+echo "Run 'link_warp_config' to symlink the warp config...\n"
 
