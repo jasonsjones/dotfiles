@@ -97,9 +97,7 @@ vim.opt.hidden = true
 -- The encoding written to a file
 vim.opt.fileencoding = "utf-8"
 
-
 --[[
-
 -- So that `` is visible in markdown files
 vim.opt.conceallevel = 0
 
@@ -112,6 +110,5 @@ vim.opt.timeoutlen = 1000
 -- If a file is being edited by another program (or was written to
 -- while editing with another program), it is not allowed to be edited
 vim.opt.writebackup = false
-
-
 --]]
+
