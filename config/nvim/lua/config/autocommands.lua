@@ -26,6 +26,9 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
     pattern = "*.md",
     callback = function()
         vim.cmd("silent! loadview")
+        vim.opt.wrap = true
+        vim.opt.linebreak = true
+        vim.opt.list = false
     end
 })
 
@@ -34,6 +37,9 @@ autocmd("BufWinLeave", {
     pattern = "*.md",
     callback = function()
         vim.cmd("mkview")
+        vim.opt.wrap = false
+        vim.opt.linebreak = false
+        vim.opt.list = true
     end
 })
 
