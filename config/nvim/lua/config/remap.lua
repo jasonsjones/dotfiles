@@ -25,6 +25,8 @@ vim.keymap.set("i", "?", "?<c-g>u", opts)
 
 --    Normal     --
 vim.keymap.set("n", "<leader>fe", vim.cmd.Ex, { desc = "[F]ile [E]xplorer" })
+vim.keymap.set('n', '<leader>sc', ':lua require("config.utils").ToggleSpellCheck()<CR>', { desc = "Toggle spell check"  })
+
 
 -- Better window navigation
 vim.keymap.set ("n", "<C-h>", "<C-w>h", opts)

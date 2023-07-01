@@ -97,6 +97,9 @@ vim.opt.hidden = true
 -- The encoding written to a file
 vim.opt.fileencoding = "utf-8"
 
+-- The spell check language to use
+vim.opt.spelllang = "en_us"
+
 --[[
 -- So that `` is visible in markdown files
 vim.opt.conceallevel = 0
