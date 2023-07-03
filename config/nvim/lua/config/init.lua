@@ -3,4 +3,5 @@ require("config.options")
 require("config.remap")
 require("config.autocommands")
 require("config.utils")
+require("config.ledger")
 
