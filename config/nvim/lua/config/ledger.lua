@@ -41,14 +41,15 @@ local function show_virtual_text(line_num, total_amount, cumulative_amount)
     local bufnr = vim.fn.bufnr()
     local namespace_id = vim.api.nvim_create_namespace("ledger_info")
     local col_num = 0
-    local opts = {
+
+    local opts1 = {
         id = 1,
         virt_text = {
             {
                 string.format(
-                    "Cumulative Amount: $%.2f | Amount Remaining: $%.2f",
-                    cumulative_amount,
-                    math.abs(total_amount - cumulative_amount)
+                    "%20s $%.2f",
+                    "Cumulative Amount: ",
+                    cumulative_amount
                 ),
                 "Comment"
             }
@@ -56,7 +57,23 @@ local function show_virtual_text(line_num, total_amount, cumulative_amount)
         virt_text_pos = "eol"
     }
 
-    vim.api.nvim_buf_set_extmark(bufnr, namespace_id, line_num, col_num, opts)
+    local opts2 = {
+        id = 2,
+        virt_text = {
+            {
+                string.format(
+                    "%22s $%.2f",
+                    "Amount Remaining: ",
+                    math.abs(total_amount - cumulative_amount)
+                ),
+                "Comment"
+            },
+        },
+        virt_text_pos = "eol"
+    }
+
+    vim.api.nvim_buf_set_extmark(bufnr, namespace_id, line_num, col_num, opts1)
+    vim.api.nvim_buf_set_extmark(bufnr, namespace_id, line_num + 1, col_num, opts2)
 end
 
 -- Generate useful information for the current transaction
