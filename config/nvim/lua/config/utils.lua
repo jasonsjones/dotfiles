@@ -1,5 +1,7 @@
+local M = {}
+
 -- Toggle spell check on/off and set language to en_us
-function ToggleSpellCheck()
+function M.toggle_spell_check()
     if vim.o.spell then
         vim.wo.spell = false
         print("Spell check disabled")
@@ -9,7 +11,5 @@ function ToggleSpellCheck()
     end
 end
 
-return {
-    ToggleSpellCheck = ToggleSpellCheck
-}
+return M
 
