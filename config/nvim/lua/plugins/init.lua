@@ -90,6 +90,12 @@ return {
         config = function ()
             require("config.lsp")
         end
+    },
+
+    -- Comments
+    {
+        "numToStr/Comment.nvim",
+        opts = {}
     }
 }
 
