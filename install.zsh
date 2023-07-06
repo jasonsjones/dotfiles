@@ -29,15 +29,15 @@ link_dotfiles () {
     ln -sf $PWD/config/zellij/config.kdl $HOME/.config/zellij
     ln -sf $PWD/config/zellij/layouts $HOME/.config/zellij
 
-    if [[ ! -d $HOME/.config/nvim ]]; then
-        mkdir -p $HOME/.config/nvim
-    fi
-
-    ln -sf $PWD/config/nvim $HOME/.config/nvim
-
     echo "\nNeed to source ~/.zshrc. Run:"
     echo "\n   \$ source ~/.zshrc"
 
+    cd -
+}
+
+link_nvim_config () {
+    cd $BASEDIR
+    ln -sf $PWD/config/nvim $HOME/.config/nvim
     cd -
 }
 
@@ -55,6 +55,14 @@ link_warp_config () {
     cd -
 }
 
+link_wezterm_config () {
+    cd $BASEDIR
+    ln -sf $PWD/config/wezterm $HOME/.config/wezterm
+    cd -
+}
+
 echo "Run 'link_dotfiles' to symlink all dotfiles to the correct spot..."
-echo "Run 'link_warp_config' to symlink the warp config...\n"
+echo "Run 'link_nvim_config' to symlink the nvim config...\n"
+echo "Run 'link_warp_config' to symlink the warp config..."
+echo "Run 'link_wezterm_config' to symlink the wezterm config...\n"
 
