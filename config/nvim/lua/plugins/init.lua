@@ -96,6 +96,13 @@ return {
     {
         "numToStr/Comment.nvim",
         opts = {}
+    },
+
+    -- Autopairs
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        opts = {}
     }
 }
 
