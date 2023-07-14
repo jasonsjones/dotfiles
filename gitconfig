@@ -32,3 +32,5 @@
 [gimlet]
 	auto-enable-trace2 = true
 	telemetry-host-id = A0A3D831-1614-401D-B917-609CD9ED8F6B
+[pull]
+	rebase = true
