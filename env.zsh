@@ -14,6 +14,8 @@ export SPACESHIP_DOCKER_SYMBOL="🐳 "
 export SPACESHIP_MAVEN_SYMBOL="🪶 "
 export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 export VI_MODE_SET_CURSOR=true
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8a8a8a"
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # colors
 export RESTORE='\033[0m'
