@@ -12,7 +12,6 @@ update () {
 
 update "$PLUGINS_DIR/zsh-autosuggestions"
 update "$PLUGINS_DIR/zsh-syntax-highlighting"
-update "$PLUGINS_DIR/zsh-vi-mode"
 update "$THEMES_DIR/spaceship-prompt"
 
 cd $CURRENT_DIR
