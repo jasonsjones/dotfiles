@@ -1,13 +1,14 @@
-NVIM_HOME=$HOME/.config/nvim
 ZSH_CUSTOM_DIR=$ZSH/custom
 BASEDIR=$(dirname $0)
 
 # TODO: add function to install neovim (see ~/tmp/util-functions.zsh)
-#
+
 link_dotfiles () {
     echo "\nCopying each dotfile to its respective location"
 
     cd $BASEDIR
+    mkdir -p $HOME/.config/alacritty
+    mkdir -p $HOME/.config/zellij
 
     ln -sf $PWD/zshrc.zsh $HOME/.zshrc
     ln -sf $PWD/zprofile.zsh $HOME/.zprofile
@@ -17,14 +18,7 @@ link_dotfiles () {
     ln -sf $PWD/gitconfig $HOME/.gitconfig
     ln -sf $PWD/ideavimrc $HOME/.ideavimrc
 
-    if [[ ! -d $HOME/.config/alacritty ]]; then
-        mkdir -p $HOME/.config/alacritty
-    fi
     ln -sf $PWD/config/alacritty/alacritty.yml $HOME/.config/alacritty/
-
-    if [[ ! -d $HOME/.config/zellij ]]; then
-        mkdir -p $HOME/.config/zellij
-    fi
 
     ln -sf $PWD/config/zellij/config.kdl $HOME/.config/zellij
     ln -sf $PWD/config/zellij/layouts $HOME/.config/zellij
@@ -37,17 +31,14 @@ link_dotfiles () {
 
 link_nvim_config () {
     cd $BASEDIR
+    mkdir -p $HOME/.config/nvim
     ln -sf $PWD/config/nvim $HOME/.config/nvim
     cd -
 }
 
 link_warp_config () {
     cd $BASEDIR
-
-    if [[ ! -d $HOME/.warp ]]; then
-        echo "$HOME/.warp does not exist; creating..."
-        mkdir -p $HOME/.warp
-    fi
+    mkdir -p $HOME/.warp
 
     echo "Linking warp config..."
     ln -sf $PWD/warp/* $HOME/.warp/
@@ -57,6 +48,7 @@ link_warp_config () {
 
 link_wezterm_config () {
     cd $BASEDIR
+    mkdir -p $HOME/.config/wezterm
     ln -sf $PWD/config/wezterm $HOME/.config/wezterm
     cd -
 }
