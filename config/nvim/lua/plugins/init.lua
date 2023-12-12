@@ -21,7 +21,7 @@ return {
         end,
     },
 
-    -- Alpha gretting screen at startup
+    -- Alpha greeting screen at startup
     {
         "goolord/alpha-nvim",
         event = "VimEnter",

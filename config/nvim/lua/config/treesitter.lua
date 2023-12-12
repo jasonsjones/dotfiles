@@ -3,23 +3,22 @@ if not status_ok then
     return
 end
 
-configs.setup {
-    ensure_installed = { "ledger", "lua", "vimdoc" },
+configs.setup({
+    ensure_installed = { "c", "javascript", "ledger", "lua", "query", "vim", "vimdoc" },
 
     sync_install = false,
 
     autopairs = {
-        enable = true
+        enable = true,
     },
 
     indent = {
         enable = true,
-        disable = { "yaml" }
+        disable = { "yaml" },
     },
 
     highlight = {
         enable = true, -- false will disable the whole extension
         additional_vim_regex_highlighting = false,
-    }
-}
-
+    },
+})
