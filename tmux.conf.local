@@ -39,6 +39,9 @@ tmux_conf_new_session_prompt=false
 
 # -- display -------------------------------------------------------------------
 
+# Tokyo Night (night) hex values
+# ------------------------------
+
 # Nord color scheme hex values
 # ----------------------------
 
