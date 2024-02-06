@@ -170,10 +170,8 @@ tmux_conf_theme_terminal_title='#h ❐ #S ● #I #W'
 #     - #{hostname_ssh}
 #     - #{username}
 #     - #{username_ssh}
-#tmux_conf_theme_window_status_fg='#eceff4'              # nord6
-tmux_conf_theme_window_status_fg='#c0caf5'              # tokyo bg
-#tmux_conf_theme_window_status_bg='#3b4252'              # nord1
-tmux_conf_theme_window_status_bg='#394b70'              # tokyo blue7
+tmux_conf_theme_window_status_fg='#eceff4'              # nord6
+tmux_conf_theme_window_status_bg='#3b4252'              # nord1
 tmux_conf_theme_window_status_attr='none'
 tmux_conf_theme_window_status_format='#I #W'
 #tmux_conf_theme_window_status_format='#{circled_window_index} #W'
@@ -258,9 +256,8 @@ tmux_conf_theme_status_left_attr='bold,none'
 
 # status right style
 #tmux_conf_theme_status_right_fg='#e5e9f0,#e5e9f0,#3b4252' # nord5, nord5, nord1
-tmux_conf_theme_status_right_fg='#c0caf5,#c0caf5,#c0caf5' # tokyo fg, tokyo fg, tokyo fg
-#tmux_conf_theme_status_right_bg='#4c566a,#bf616a,#eceff4' # nord3, nord11, nord6
-tmux_conf_theme_status_right_bg='#394670,#db4b4b,#3d59a1' # toyko blue7, tokyo red1, tokyo blue0
+tmux_conf_theme_status_right_fg='#737aa2,#e5e9f0,#3b4252' # nord5, nord5, nord1
+tmux_conf_theme_status_right_bg='#4c566a,#bf616a,#eceff4' # nord3, nord11, nord6
 tmux_conf_theme_status_right_attr='none,none,bold'
 
 # pairing indicator
@@ -328,8 +325,7 @@ tmux_conf_battery_status_discharging='↓'    # U+2193
 
 # clock style (when you hit <prefix> + t)
 # you may want to use %I:%M %p in place of %R in tmux_conf_theme_status_right
-#tmux_conf_theme_clock_colour='#5e81ac'  # nord10
-tmux_conf_theme_clock_colour='#ff9e64'  # tokyo orange
+tmux_conf_theme_clock_colour='#5e81ac'  # nord10
 tmux_conf_theme_clock_style='24'
 
 
