@@ -104,6 +104,12 @@ return {
         opts = {},
     },
 
+    -- Dressing
+    {
+        "stevearc/dressing.nvim",
+        opts = {},
+    },
+
     -- Neorg
     {
         "nvim-neorg/neorg",
