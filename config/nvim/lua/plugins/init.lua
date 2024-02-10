@@ -28,14 +28,6 @@ return {
         end,
     },
 
-    -- Git
-    {
-        "lewis6991/gitsigns.nvim",
-        config = function()
-            require("gitsigns").setup({})
-        end,
-    },
-
     -- Fuzzy Finder (files, lsp, etc)
     {
         "nvim-telescope/telescope.nvim",
@@ -64,7 +56,6 @@ return {
             { "neovim/nvim-lspconfig" }, -- Required
             { "williamboman/mason.nvim" }, -- Optional
             { "williamboman/mason-lspconfig.nvim" }, -- Optional
-
             -- Autocompletion
             { "hrsh7th/nvim-cmp" }, -- Required
             { "hrsh7th/cmp-nvim-lsp" }, -- Required
@@ -72,7 +63,6 @@ return {
             { "hrsh7th/cmp-path" }, -- Optional
             { "saadparwaiz1/cmp_luasnip" }, -- Optional
             { "hrsh7th/cmp-nvim-lua" }, -- Optional
-
             -- Snippets
             { "L3MON4D3/LuaSnip" }, -- Required
             { "rafamadriz/friendly-snippets" }, -- Optional
