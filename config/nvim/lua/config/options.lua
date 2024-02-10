@@ -100,6 +100,11 @@ vim.opt.fileencoding = "utf-8"
 -- The spell check language to use
 vim.opt.spelllang = "en_us"
 
+-- Netrw settings
+vim.g.netrw_winsize = 25
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3 -- tree style
+
 --[[
 -- So that `` is visible in markdown files
 vim.opt.conceallevel = 0
@@ -114,4 +119,3 @@ vim.opt.timeoutlen = 1000
 -- while editing with another program), it is not allowed to be edited
 vim.opt.writebackup = false
 --]]
-

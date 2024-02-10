@@ -22,7 +22,7 @@ vim.keymap.set("i", "!", "!<c-g>u", opts)
 vim.keymap.set("i", "?", "?<c-g>u", opts)
 
 --    Normal     --
-vim.keymap.set("n", "<leader>fe", vim.cmd.Ex, { desc = "[F]ile [E]xplorer" })
+vim.keymap.set("n", "<leader>fe", vim.cmd.Lexplore, { desc = "[F]ile [E]xplorer" })
 vim.keymap.set(
     "n",
     "<leader>sc",
