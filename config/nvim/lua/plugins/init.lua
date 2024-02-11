@@ -10,15 +10,6 @@ return {
         opts = {},
     },
 
-    -- Treesitter for syntax highlighting and much more...
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        config = function()
-            require("config.treesitter")
-        end,
-    },
-
     -- LSP setup
     {
         "VonHeikemen/lsp-zero.nvim",
