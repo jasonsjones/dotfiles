@@ -10,14 +10,6 @@ return {
         opts = {},
     },
 
-    -- Updated statusline
-    {
-        "nvim-lualine/lualine.nvim",
-        config = function()
-            require("config.lualine")
-        end,
-    },
-
     -- Fuzzy Finder (files, lsp, etc)
     {
         "nvim-telescope/telescope.nvim",
