@@ -18,10 +18,8 @@ link_dotfiles () {
     ln -sf $PWD/gitconfig $HOME/.gitconfig
     ln -sf $PWD/ideavimrc $HOME/.ideavimrc
 
-    ln -sf $PWD/config/alacritty/alacritty.yml $HOME/.config/alacritty/
-
-    ln -sf $PWD/config/zellij/config.kdl $HOME/.config/zellij
-    ln -sf $PWD/config/zellij/layouts $HOME/.config/zellij
+    ln -sf $PWD/config/alacritty $HOME/.config/alacritty
+    ln -sf $PWD/config/zellij $HOME/.config/zellij
 
     echo "\nNeed to source ~/.zshrc. Run:"
     echo "\n   \$ source ~/.zshrc"
