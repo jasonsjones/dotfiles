@@ -2,7 +2,10 @@
 themes {
     tokyo-night {
         fg 169 177 214
-        bg 26 27 38
+        // update the bg color so the session manager highlight
+        // is visible. Originally set to `bg 26 27 38`, which is
+        // the same color as the terminal background.
+        bg 41 46 66
         black 56 62 90
         red 249 51 87
         green 158 206 106
