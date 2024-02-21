@@ -30,7 +30,7 @@ layout {
     }
 
     tab name="sfdx projects" {
-        pane cwd="/Users/jasonjones/projects/sfdx"
+        pane cwd="/Users/jasonjones/projects/sfdx-projects"
     }
 }
 
