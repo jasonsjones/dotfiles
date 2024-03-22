@@ -23,12 +23,6 @@
 	normaltarget = /Users/jasonjones/.gimlet-home/trace2
 	configParams = remote.*.url
 	normalBrief = true
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-
 [gimlet]
 	auto-enable-trace2 = true
 	telemetry-host-id = A0A3D831-1614-401D-B917-609CD9ED8F6B
