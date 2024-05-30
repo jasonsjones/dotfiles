@@ -61,6 +61,7 @@ link_wezterm_config () {
     cd -
 }
 
+echo "Run 'install_ohmyzsh' to install oh-my-zsh and the two plugins\n"
 echo "Run 'link_dotfiles' to symlink all dotfiles to the correct spot..."
 echo "Run 'link_nvim_config' to symlink the nvim config...\n"
 echo "Run 'link_warp_config' to symlink the warp config..."
