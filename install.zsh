@@ -1,7 +1,17 @@
+ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM_DIR=$ZSH/custom
 BASEDIR=$(dirname $0)
 
 # TODO: add function to install neovim (see ~/tmp/util-functions.zsh)
+
+install_ohmyzsh() {
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    # add useful zsh plugins
+    if [[ -d $HOME/.oh-my-zsh ]]; then
+        git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH/custom/plugins/zsh-autosuggestions
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH/custom/plugins/zsh-syntax-highlighting
+    fi
+}
 
 link_dotfiles () {
     echo "\nCopying each dotfile to its respective location"
