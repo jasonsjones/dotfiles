@@ -6,7 +6,7 @@ BASEDIR=$(dirname $0)
 
 install_brew_binaries() {
     for binary in $(cat brew_binaries.txt); do;
-        echo 'intalling "$binary"'
+        echo "intalling $binary"
          brew install "$binary"
     done
 }
