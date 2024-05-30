@@ -1,0 +1,9 @@
+bat
+git-delta
+lazygit
+ledger
+neovim
+ripgrep
+tmux
+zellij
+
