@@ -5,4 +5,5 @@ require("config.autocommands")
 require("config.globals")
 require("config.utils")
 require("config.ledger")
+require("config.lsp")
 

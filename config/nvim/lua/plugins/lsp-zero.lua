@@ -1,4 +1,15 @@
 return {
+    { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
+    { "neovim/nvim-lspconfig" },
+    { "williamboman/mason.nvim" },
+    { "williamboman/mason-lspconfig.nvim" },
+    { "hrsh7th/nvim-cmp" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "L3MON4D3/LuaSnip" },
+}
+
+--[[
+return {
     "VonHeikemen/lsp-zero.nvim",
     branch = "v2.x",
     dependencies = {
@@ -44,8 +55,7 @@ return {
         local function shallow_copy(orig)
             local orig_type = type(orig)
             local copy
-            if orig_type == "table" then
-                copy = {}
+            if orig_type == "table" then copy = {}
                 for orig_key, orig_val in pairs(orig) do
                     copy[orig_key] = orig_val
                 end
@@ -146,3 +156,4 @@ return {
         })
     end,
 }
+--]]
