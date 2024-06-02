@@ -1,7 +1,9 @@
-local lsp_zero_status_ok, lsp_zero = pcall(require, "lsp-zero")
-if not lsp_zero_status_ok then
-    return
-end
+local lsp_zero = require("lsp-zero")
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+local cmp_action = require("lsp-zero").cmp_action()
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
 
 lsp_zero.on_attach(function(_, bufnr) -- first parameter is "client"
     -- see :help lsp-zero-keybindings
@@ -11,31 +13,14 @@ end)
 
 --- if you want to know more about mason.nvim
 --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-require("mason").setup({})
-require("mason-lspconfig").setup({
+mason.setup({})
+mason_lspconfig.setup({
     handlers = {
         function(server_name)
             require("lspconfig")[server_name].setup({})
         end,
     },
 })
-
---[[
--- super tab like mapping
--- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#super-tab-like-mapping
-local has_words_before = function()
-    unpack = unpack or table.unpack
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
---]]
-
-local cmp = require("cmp")
-local cmp_action = require("lsp-zero").cmp_action()
 
 cmp.setup({
     mapping = cmp.mapping.preset.insert({
@@ -53,37 +38,36 @@ cmp.setup({
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
 
-        mapping,
-
-        --[[
-        -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#super-tab-like-mapping
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif vim.fn["vsnip#available"](1) == 1 then
-                feedkey("<Plug>(vsnip-expand-or-jump)", "")
-            elseif has_words_before() then
-                cmp.complete()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
             else
-                -- The fallback function sends a already mapped key.
-                -- In this case, it's probably `<Tab>`.
                 fallback()
             end
         end, { "i", "s" }),
 
-        ["<S-Tab>"] = cmp.mapping(function()
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-                feedkey("<Plug>(vsnip-jump-prev)", "")
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
             end
         end, { "i", "s" }),
-        --]]
+    }),
+
+    sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        { name = "buffer" },
     }),
 
     snippet = {
         expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
 })
