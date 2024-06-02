@@ -20,6 +20,7 @@ require("mason-lspconfig").setup({
     },
 })
 
+--[[
 -- super tab like mapping
 -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#super-tab-like-mapping
 local has_words_before = function()
@@ -31,6 +32,7 @@ end
 local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
+--]]
 
 local cmp = require("cmp")
 local cmp_action = require("lsp-zero").cmp_action()
@@ -51,6 +53,9 @@ cmp.setup({
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
 
+        mapping,
+
+        --[[
         -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#super-tab-like-mapping
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -73,6 +78,7 @@ cmp.setup({
                 feedkey("<Plug>(vsnip-jump-prev)", "")
             end
         end, { "i", "s" }),
+        --]]
     }),
 
     snippet = {
