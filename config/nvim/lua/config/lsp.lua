@@ -19,6 +19,9 @@ mason_lspconfig.setup({
         function(server_name)
             require("lspconfig")[server_name].setup({})
         end,
+
+        -- this is the "custom handler" for `jdtls`
+        jdtls = lsp_zero.noop,
     },
 })
 
