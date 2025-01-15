@@ -18,13 +18,8 @@
 	defaultBranch = main
 [branch "main"]
 	rebase = true
-[trace2]
-	maxFiles = 800
-	normaltarget = /Users/jasonjones/.gimlet-home/trace2
-	configParams = remote.*.url
-	normalBrief = true
 [gimlet]
-	auto-enable-trace2 = true
 	telemetry-host-id = A0A3D831-1614-401D-B917-609CD9ED8F6B
+	lfs-token-warning-timestamp = 1737068148
 [pull]
 	rebase = true
