@@ -14,6 +14,8 @@ alias ccb="ledger -c bal checking liabilities:mastercard \
 alias cfb="ledger bal checking liabilities:mastercard \
           liabilities:visa:joint liabilities:visa:usna bank:savings assets:cash"
 
+alias dbsync="bazel build //db/tools/... && bazel run //db/tools:sdb.grant && bazel run //:db-schema-update"
+
 
 # Old aliases
 #alias zshconfig="code --new-window ~/.zshrc"
