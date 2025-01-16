@@ -55,7 +55,7 @@ ZSH_THEME="robbyrussell"
 #
 # NOTE: zsh-syntax-highlighting needs to be the last plugin loaded because of how it hooks into
 # the zsh line editor (ZLE)
-plugins=(git gitfast node yarn docker docker-compose vi-mode z zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git gitfast node yarn vi-mode z zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
