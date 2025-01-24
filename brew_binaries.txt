@@ -5,6 +5,4 @@ lazygit
 ledger
 neovim
 ripgrep
-tmux
 zellij
-
