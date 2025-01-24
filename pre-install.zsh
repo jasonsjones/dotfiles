@@ -8,6 +8,6 @@ else
 fi
 
 
-git clone https://github.com/gpakosz/.tmux.git "$HOME/.tmux"
-ln -sf $HOME/.tmux/.tmux.conf $HOME/
+# git clone https://github.com/gpakosz/.tmux.git "$HOME/.tmux"
+# ln -sf $HOME/.tmux/.tmux.conf $HOME/
 
