@@ -5,7 +5,7 @@ BASEDIR=$(dirname $0)
 # TODO: add function to install neovim (see ~/tmp/util-functions.zsh)
 
 install_brew_binaries() {
-    for binary in $(cat brew_binaries.txt); do;
+    for binary in $(cat brew_binaries.txt); do
         echo "intalling $binary"
          brew install "$binary"
     done
