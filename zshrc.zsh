@@ -111,3 +111,15 @@ else
     export JAVA_HOME=$(/usr/libexec/java_home)
     export PATH=/usr/local/bin:$COMMON_PATH:$JAVA_HOME/bin:$PATH
 fi
+
+NOTES_DIR=$HOME/notes
+JOURNAL_HOME=$NOTES_DIR/areas/journal
+journal() {
+    journal_file_name=$(date +%y%m%d_journal)
+    if [[ ! -e "$JOURNAL_HOME/$journal_file_name.md" ]]; then
+        cp $JOURNAL_HOME/_template.md $JOURNAL_HOME/$journal_file_name.md
+        sed '' -i "s/{{Date}}/$(date +%m-%d-%Y)/g" $JOURNAL_HOME/$journal_file_name.md
+    fi
+    nvim $JOURNAL_HOME/$journal_file_name.md
+}
+
