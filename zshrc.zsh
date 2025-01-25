@@ -115,11 +115,14 @@ fi
 NOTES_DIR=$HOME/notes
 JOURNAL_HOME=$NOTES_DIR/areas/journal
 journal() {
+    year=$(date +%Y)
     journal_file_name=$(date +%y%m%d_journal)
-    if [[ ! -e "$JOURNAL_HOME/$journal_file_name.md" ]]; then
-        cp $JOURNAL_HOME/_template.md $JOURNAL_HOME/$journal_file_name.md
-        sed '' -i "s/{{Date}}/$(date +%m-%d-%Y)/g" $JOURNAL_HOME/$journal_file_name.md
+    journal_file_path=$JOURNAL_HOME/$year/$journal_file_name.md
+
+    if [[ ! -e "$journal_file_path" ]]; then
+        cp $JOURNAL_HOME/_template.md $journal_file_path
+        sed -i '' "s/{{Date}}/$(date +%m-%d-%Y)/g" $journal_file_path
     fi
-    nvim $JOURNAL_HOME/$journal_file_name.md
+    nvim $journal_file_path
 }
 
