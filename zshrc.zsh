@@ -115,14 +115,28 @@ fi
 NOTES_DIR=$HOME/notes
 JOURNAL_HOME=$NOTES_DIR/areas/journal
 journal() {
+    cd $NOTES_DIR
     year=$(date +%Y)
     journal_file_name=$(date +%y%m%d_journal)
+    branch_name=$(date +%y%m%d-journal)
+    current_branch=$(git rev-parse --abbrev-ref HEAD)
     journal_file_path=$JOURNAL_HOME/$year/$journal_file_name.md
+
+    # check if a git branch exist for this journal and switch to it
+    # otherwise, create it.
+    if git rev-parse --verify --quiet $branch_name > /dev/null; then
+        if [[ $current_branch != $branch_name ]]; then
+            git switch $branch_name
+        fi
+    else
+        git switch -c $branch_name
+    fi
 
     if [[ ! -e "$journal_file_path" ]]; then
         cp $JOURNAL_HOME/_template.md $journal_file_path
         sed -i '' "s/{{Date}}/$(date +%m-%d-%Y)/g" $journal_file_path
     fi
     nvim $journal_file_path
+    cd - > /dev/null
 }
 
