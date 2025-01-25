@@ -1,0 +1,36 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
+    tab name="scratch" focus=true {
+        pane cwd="/Users/jasonjones"
+    }
+
+    tab name="build tasks" {
+        pane cwd="/opt/workspace/core-public/core"
+    }
+
+    tab name="server" {
+        pane cwd="/opt/workspace/core-public/core"
+    }
+
+    tab name="git chores" {
+        pane cwd="/opt/workspace/core-public/core"
+    }
+
+    tab name="git.soma projects" {
+        pane cwd="/Users/jasonjones/projects/git-soma"
+    }
+
+    tab name="sfdx projects" {
+        pane cwd="/Users/jasonjones/projects/sfdx-projects"
+    }
+}
+
