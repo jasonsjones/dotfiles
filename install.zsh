@@ -70,8 +70,10 @@ link_wezterm_config () {
 
 echo "Run 'install_ohmyzsh' to install oh-my-zsh and the two plugins\n"
 echo "Run 'install_brew_binaries' to install the 'brew' binaries defined in ./brew_binaries.txt"
-echo "\t contents of 'brew_binaries.txt"
-cat brew_binaries.txt
+echo "    contents of 'brew_binaries.txt:"
+echo ""
+\cat brew_binaries.txt
+echo ""
 echo "Run 'link_dotfiles' to symlink all dotfiles to the correct spot..."
 echo "Run 'link_nvim_config' to symlink the nvim config...\n"
 echo "Run 'link_warp_config' to symlink the warp config..."
