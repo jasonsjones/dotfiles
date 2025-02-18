@@ -95,7 +95,7 @@ vim.opt.iskeyword:append("-")
 vim.opt.hidden = true
 
 -- The encoding written to a file
-vim.opt.fileencoding = "utf-8"
+-- vim.opt.fileencoding = "utf-8"
 
 -- The spell check language to use
 vim.opt.spelllang = "en_us"
