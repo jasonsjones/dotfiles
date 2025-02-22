@@ -42,6 +42,10 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
 vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
 vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
 
+-- Terminal mode window navigation
+vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", opts)
+vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", opts)
+
 -- Navigate buffers
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", opts)
 vim.keymap.set("n", "<S-h>", ":bprevious<CR>", opts)

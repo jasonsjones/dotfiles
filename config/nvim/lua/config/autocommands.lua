@@ -6,7 +6,7 @@ local TrailingWhitespace = augroup("TrailingWhitespace", { clear = true })
 autocmd({ "BufWritePre" }, {
     group = TrailingWhitespace,
     pattern = "*",
-    command = [[%s/\s\+$//e]]
+    command = [[%s/\s\+$//e]],
 })
 
 -- Highlight on yank
@@ -16,7 +16,7 @@ autocmd("TextYankPost", {
     pattern = "*",
     callback = function()
         vim.highlight.on_yank()
-    end
+    end,
 })
 
 -- Local setting for markdown files
@@ -29,7 +29,7 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
         vim.opt.wrap = true
         vim.opt.linebreak = true
         vim.opt.list = false
-    end
+    end,
 })
 
 autocmd("BufWinLeave", {
@@ -40,6 +40,24 @@ autocmd("BufWinLeave", {
         vim.opt.wrap = false
         vim.opt.linebreak = false
         vim.opt.list = true
-    end
+    end,
 })
 
+local ZellijIntegration = augroup("ZellijIntegration", { clear = true })
+autocmd("VimEnter", {
+    group = ZellijIntegration,
+    pattern = "*",
+    callback = function()
+        vim.fn.system({ "zellij", "action", "switch-mode", "locked" })
+    end,
+})
+
+autocmd("VimLeavePre", {
+    group = ZellijIntegration,
+    pattern = "*",
+    callback = function()
+        if vim.env.ZELLIJ ~= nil then
+            vim.fn.system({ "zellij", "action", "switch-mode", "normal" })
+        end
+    end,
+})

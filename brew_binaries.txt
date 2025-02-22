@@ -1,8 +1,11 @@
 maven
 bat
+fd
 git-delta
 lazygit
 ledger
 neovim
+prettier
 ripgrep
+stylua
 zellij
