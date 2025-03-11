@@ -140,3 +140,11 @@ journal() {
     cd - > /dev/null
 }
 
+find_commit_from_cl() {
+    git sfdc show-p4-sync-commit -c $1
+}
+
+show_commit_from_cl() {
+    git show $(git sfdc show-p4-sync-commit -c $1)
+}
+
