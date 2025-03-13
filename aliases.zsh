@@ -2,6 +2,7 @@ alias c="clear"
 alias cat="bat --theme=TwoDark"
 alias lg="lazygit"
 alias vim="nvim"
+alias kode="open $1 -a \"Visual Studio Code\""
 
 alias setpublicregistry="npm config set registry https://registry.npmjs.org/"
 
