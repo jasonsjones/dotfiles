@@ -95,7 +95,7 @@ COMMON_PATH=/opt/X11/bin:$HOME/blt:$HOME/bin:$VOLTA_HOME/bin
 
 # Update env vars whether or not we're runing on the mac studio (M1) or MBP
 if [[ "$hostname" == *wsm* || "$hostname"  == *ltmv7x4* ]]; then
-    export JAVA_HOME=/opt/workspace/core-public/tools/Darwin/jdk/openjdk_17.0.12.0.101_17_53.12_aarch64
+    export JAVA_HOME=/opt/workspace/core-public/tools/Darwin/jdk/openjdk_17.0.12.0.101_17.53.12_aarch64
 
     # configure homebrew dir for M1 mac first to override system binaries
     export PATH=/opt/homebrew/bin:$COMMON_PATH:$JAVA_HOME/bin:$PATH
