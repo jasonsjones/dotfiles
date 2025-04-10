@@ -91,14 +91,14 @@ fi
 hostname=$(hostname)
 export VOLTA_HOME="$HOME/.volta"
 # export CC="/usr/bin/clang -std=c++17"
-COMMON_PATH=/opt/X11/bin:$HOME/blt:$HOME/bin:$VOLTA_HOME/bin
+COMMON_PATH=$VOLTA_HOME/bin:/opt/X11/bin:$HOME/blt:$HOME/bin
 
 # Update env vars whether or not we're runing on the mac studio (M1) or MBP
 if [[ "$hostname" == *wsm* || "$hostname"  == *ltmv7x4* ]]; then
     export JAVA_HOME=/opt/workspace/core-public/tools/Darwin/jdk/openjdk_17.0.12.0.101_17.53.12_aarch64
 
     # configure homebrew dir for M1 mac first to override system binaries
-    export PATH=/opt/homebrew/bin:$COMMON_PATH:$JAVA_HOME/bin:$PATH
+    export PATH=$COMMON_PATH:/opt/homebrew/bin:$JAVA_HOME/bin:$PATH
 
     if [[ "$hostname" == *wsm* ]]; then
         # configure CORE directory to point to core-on-git when running on mac studio
