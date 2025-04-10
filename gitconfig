@@ -20,7 +20,7 @@
 	rebase = true
 [gimlet]
 	telemetry-host-id = A0A3D831-1614-401D-B917-609CD9ED8F6B
-	lfs-token-warning-timestamp = 1742335704
+	lfs-token-warning-timestamp = 1743539412
 [pull]
 	rebase = true
 [gimlet "automaint-daily"]
