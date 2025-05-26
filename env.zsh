@@ -17,6 +17,9 @@ export VI_MODE_SET_CURSOR=true
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#8a8a8a"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+export DISABLE_BAZELPROJECT_FILE_MONITORING_PATH_ENABLER=true
+export COMPONENT_MONITORING_PROPERTIES=$HOME/projects/git-soma/componentMonitoring.properties
+
 # colors
 export RESTORE='\033[0m'
 
