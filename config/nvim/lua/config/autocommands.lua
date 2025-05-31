@@ -29,6 +29,10 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
         vim.opt.wrap = true
         vim.opt.linebreak = true
         vim.opt.list = false
+        -- Set up folding for markdown
+        vim.opt.foldmethod = "expr"
+        vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+        vim.opt.foldlevel = 99
     end,
 })
 
