@@ -33,6 +33,9 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
         vim.opt.foldmethod = "expr"
         vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
         vim.opt.foldlevel = 99
+        -- Customize fold appearance using Tokyo Night colors
+        vim.cmd([[highlight Folded guifg=#7aa2f7 guibg=#24283b]])
+        vim.cmd([[highlight FoldColumn guifg=#7aa2f7 guibg=#1a1b26]])
     end,
 })
 
