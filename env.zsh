@@ -9,6 +9,7 @@ fi
 export LEDGER="$HOME/ledgers/master_ledger.ldg"
 export EDITOR='nvim'
 export GPG_TTY=$(tty)
+export ICLOUD_DRIVE_LOCATION=~/Library/Mobile\ Documents/com\~apple\~CloudDocs
 export SPACESHIP_PACKAGE_SYMBOL="📦 "
 export SPACESHIP_DOCKER_SYMBOL="🐳 "
 export SPACESHIP_MAVEN_SYMBOL="🪶 "
