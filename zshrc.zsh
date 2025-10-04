@@ -148,3 +148,14 @@ show_commit_from_cl() {
     git show $(git sfdc show-p4-sync-commit -c $1)
 }
 
+# Added by dx-cli for Claude Code (native binary installation)
+export PATH="$HOME/.local/bin:$PATH"
+# TODO: update the above re-export of $PATH with the existing logic above to determine if
+# we're on an M-chip or not.
+
+# Added by dx-cli for Claude Code CA certificates
+# export NODE_EXTRA_CA_CERTS="/Users/jasonjones/.claude/certs/salesforce-ca-bundle.pem"
+#
+# Note: for now, this cert is concatenated with others in a separate script located in
+# ~/scripts/sfdx-local-certs.zsh
+#
