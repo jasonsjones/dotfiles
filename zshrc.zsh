@@ -159,3 +159,72 @@ export PATH="$HOME/.local/bin:$PATH"
 # Note: for now, this cert is concatenated with others in a separate script located in
 # ~/scripts/sfdx-local-certs.zsh
 #
+
+
+
+# Function to generate a # random_time.sh
+#
+# Generates a random time between 09:30:00 and 21:30:00.
+#
+# How it works:
+# 1. We calculate the start and end times in seconds since midnight.
+#    Start: 09:30:00 = 9*3600 + 30*60 = 34200 seconds
+#    End:   21:30:00 = 21*3600 + 30*60 = 77400 seconds
+# 2. The total range is 77400 - 34200 = 43200 seconds (exactly 12 hours).
+# 3. We use awk to:
+#    a. Seed its random number generator (`srand()`).
+#    b. Generate a random integer between 0 and 43200 (`int(rand() * 43201)`).
+#    c. Add this to our start time (34200) to get a random timestamp.
+#    d. Format this timestamp as HH:MM:SS using `strftime("%T", ...)`.random time between 09:30:00 and 21:30:00
+# Function to generate a random time between 09:30:00 and 21:30:00 (macOS/BSD compatible)
+# This is a dependency for the next function.
+random_time() {
+  awk 'BEGIN {
+    srand()
+    total_seconds = int(rand() * 43201) + 34200
+    hours = int(total_seconds / 3600)
+    minutes = int((total_seconds % 3600) / 60)
+    seconds = total_seconds % 60
+    printf "%02d:%02d:%02d\n", hours, minutes, seconds
+  }'
+}
+
+# Creates a full Git-compatible date string
+# Usage: git_random_date MM/DD/YY
+git_random_date() {
+  # Check if a date argument was provided
+  if [ -z "$1" ]; then
+    echo "Usage: git_random_date MM/DD/YY"
+    return 1 # Exit with an error
+  fi
+
+  local input_date="$1"
+
+  # 1. Parse the input date and format it, including the correct
+  #    timezone offset *for that specific date*.
+  #    -j : "do not try to set the date"
+  #    -f : "specify the input format"
+  #    +%a %b %d %Y %z : "output as: <Day> <Mon> <DayNum> <Year> <Offset>"
+  local date_and_tz_part
+  date_and_tz_part=$(date -j -f "%m/%d/%y" "$input_date" "+%a %b %d %Y %z" 2>/dev/null)
+
+  # Error handling for bad date input
+  if [ -z "$date_and_tz_part" ]; then
+     echo "Error: Invalid date format. Please use MM/DD/YY (e.g., 08/07/25)"
+     return 1
+  fi
+
+  # 2. Get the random time from our other function
+  local time_part
+  time_part=$(random_time)
+
+  # 3. Separate the date and timezone parts from the formatted string.
+  #    The string is "Thu Aug 07 2025 -0700"
+  #    This gets everything *except* the last part: "Thu Aug 07 2025"
+  local date_part="${date_and_tz_part% *}"
+  #    This gets *only* the last part: "-0700"
+  local tz_part="${date_and_tz_part##* }"
+
+  # 4. Echo the final, assembled string
+  echo "$date_part $time_part $tz_part"
+}
