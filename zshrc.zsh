@@ -228,3 +228,44 @@ git_random_date() {
   # 4. Echo the final, assembled string
   echo "$date_part $time_part $tz_part"
 }
+
+# A custom "git commit" wrapper for random-time dates
+#
+# Usage:
+#   git-commit-rand -m "My message"           (for today)
+#   git-commit-rand -m "My message" 08/07/25  (for specific date)
+#
+git-commit-rand() {
+  local commit_msg
+  local date_arg
+
+  # Simple argument parsing: find the -m "message"
+  if [ "$1" = "-m" ] && [ -n "$2" ]; then
+    commit_msg="$2"
+    # Get the optional date (it's $3)
+    date_arg="$3"
+  else
+    echo "Usage: git-commit-rand -m \"<message>\" [MM/DD/YY]"
+    return 1
+  fi
+
+  local date_str
+  # Check if a date was provided to our function
+  if [ -n "$date_arg" ]; then
+    date_str=$(git_random_date "$date_arg")
+  else
+    date_str=$(git_random_date) # No date arg, so git_random_date will use today's
+  fi
+
+  # Check if git_random_date gave an error
+  if [ -z "$date_str" ]; then
+    echo "Date generation failed."
+    return 1
+  fi
+
+  # --- The Final Command ---
+  echo "Running: git commit -m \"$commit_msg\" --date=\"$date_str\""
+  git commit -m "$commit_msg" --date="$date_str"
+}
+
+alias git='f() { if [ "$1" = "commit-rand" ]; then shift; git-commit-rand "$@"; else command git "$@"; fi }; f'
