@@ -268,4 +268,4 @@ git-commit-rand() {
   git commit -m "$commit_msg" --date="$date_str"
 }
 
-alias git='f() { if [ "$1" = "commit-rand" ]; then shift; git-commit-rand "$@"; else command git "$@"; fi }; f'
+#alias git='f() { if [ "$1" = "commit-rand" ]; then shift; git-commit-rand "$@"; else command git "$@"; fi }; f'
