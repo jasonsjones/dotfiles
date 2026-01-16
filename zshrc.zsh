@@ -74,6 +74,32 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
+get_java_home() {
+    # 1. Define the base directory
+    local base_dir="/opt/workspace/core-public/tools/Darwin/jdk"
+
+    # 2. Check if the directory exists to avoid errors
+    if [ ! -d "$base_dir" ]; then
+        echo "Error: Directory $base_dir not found."
+        return 1
+    fi
+
+    # 3. Find the most recently modified directory matching the pattern
+    # -d: List directory names, not their contents
+    # -t: Sort by modification time (newest first)
+    local latest_jdk
+    latest_jdk=$(ls -dt "$base_dir"/openjdk_*_aarch64 2>/dev/null | head -n 1)
+
+    # 4. Check if we actually found a match
+    if [ -z "$latest_jdk" ]; then
+        echo "No matching openjdk_*_aarch64 directories found."
+        return 1
+    fi
+
+    # 5. Return only the folder name (basename)
+    basename "$latest_jdk"
+}
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -95,7 +121,7 @@ COMMON_PATH=$VOLTA_HOME/bin:/opt/X11/bin:$HOME/blt:$HOME/bin
 
 # Update env vars whether or not we're runing on the mac studio (M1) or MBP
 if [[ "$hostname" == *wsm* || "$hostname"  == *ltmv7x4* ]]; then
-    export JAVA_HOME=/opt/workspace/core-public/tools/Darwin/jdk/openjdk_17.0.12.0.101_17.53.12_aarch64
+    export JAVA_HOME=/opt/workspace/core-public/tools/Darwin/jdk/$(get_java_home)
 
     # configure homebrew dir for M1 mac first to override system binaries
     export PATH=$COMMON_PATH:/opt/homebrew/bin:$JAVA_HOME/bin:$PATH
