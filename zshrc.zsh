@@ -295,3 +295,55 @@ git-commit-rand() {
 }
 
 #alias git='f() { if [ "$1" = "commit-rand" ]; then shift; git-commit-rand "$@"; else command git "$@"; fi }; f'
+
+# Function to automate GitHub EMU repo setup
+# Usage: gclone_emu <repo-name>
+gitclone_emu() {
+    # Check if a repo name was provided
+    if [ -z "$1" ]; then
+        echo "Error: Please provide a repository name."
+        echo "Usage: gclone_emu adk-experts-lwc"
+        return 1
+    fi
+
+    local REPO_NAME=$1
+    local TARGET_DIR=~/projects/github-emu
+    local START_DIR=$(pwd)
+
+    # Define your specific EMU namespaces
+    local MY_EMU_USER="jasonjones_sfemu"
+    local ORG_EMU_NAME="salesforce-experience-platform-emu"
+    local SSH_ALIAS="sfdc_emu"
+
+    # Check if the directory already exists
+    if [ -d "$FULL_PATH" ]; then
+        echo "Error: Directory '$FULL_PATH' already exists."
+        echo "Aborting to prevent overwriting or duplicate configuration."
+        # Navigate there anyway if you want to be helpful
+        cd "$FULL_PATH"
+        return 1
+    fi
+
+    # Navigate to your projects folder
+    cd "$TARGET_DIR" || { echo "Directory $TARGET_DIR not found"; return 1; }
+
+    echo "--- Cloning $REPO_NAME from $MY_EMU_USER ---"
+
+    # Clone your fork
+    git clone git@$SSH_ALIAS:$MY_EMU_USER/$REPO_NAME.git
+
+    # Enter the new directory
+    cd "$REPO_NAME" || return 1
+
+    echo "--- Adding upstream remote: $ORG_EMU_NAME ---"
+
+    # Add the upstream remote pointing to the source org
+    git remote add upstream git@$SSH_ALIAS:$ORG_EMU_NAME/$REPO_NAME.git
+
+    echo "--- Setup Complete in $(pwd)! ---"
+    git remote -v
+
+    # OPTIONAL: Uncomment the line below if you want to automatically
+    # return to your original directory instead of staying in the repo.
+    cd "$START_DIR"
+}
