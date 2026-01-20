@@ -307,7 +307,7 @@ gitclone_emu() {
     fi
 
     local REPO_NAME=$1
-    local TARGET_DIR=~/projects/github-emu
+    local TARGET_DIR=~/projects/git-emu
     local START_DIR=$(pwd)
 
     # Define your specific EMU namespaces
