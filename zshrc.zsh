@@ -302,7 +302,7 @@ gitclone_emu() {
     # Check if a repo name was provided
     if [ -z "$1" ]; then
         echo "Error: Please provide a repository name."
-        echo "Usage: gclone_emu adk-experts-lwc"
+        echo "Usage: gitclone_emu adk-experts-lwc"
         return 1
     fi
 
