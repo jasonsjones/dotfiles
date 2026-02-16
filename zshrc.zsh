@@ -176,6 +176,12 @@ show_commit_from_cl() {
 
 # Added by dx-cli for Claude Code (native binary installation)
 export PATH="$HOME/.local/bin:$PATH"
+
+# Added by Windsurf
+export PATH="/Users/jasonjones/.codeium/windsurf/bin:$PATH"
+
+
+
 # TODO: update the above re-export of $PATH with the existing logic above to determine if
 # we're on an M-chip or not.
 
@@ -347,3 +353,4 @@ gitclone_emu() {
     # return to your original directory instead of staying in the repo.
     cd "$START_DIR"
 }
+
