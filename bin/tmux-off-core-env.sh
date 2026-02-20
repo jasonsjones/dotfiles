@@ -2,7 +2,8 @@
 
 SESSION_NAME=off-core
 GIT_SOMA_DIR="$HOME/projects/git-soma"
-SFDX_PROJ_DIR="$HOME/projects/sfdx-projects"
+GIT_EMU_DIR="$HOME/projects/git-emu"
+SFDX_PROJ_DIR="$HOME/projects/sf-projects"
 
 tmux has-session -t $SESSION_NAME 2>/dev/null
 
@@ -17,8 +18,11 @@ if [ $? != 0 ]; then
     # Window: git soma projects
     tmux new-window -n "webruntime" -c $GIT_SOMA_DIR/webruntime
 
-    # Window: sfdx projects
+    # Window: sf projects
     tmux new-window -n "sf projects" -c $SFDX_PROJ_DIR
+
+    # Window: webapps project
+    tmux new-window -n "webapps" -c $GIT_EMU_DIR/webapps
 
     tmux select-window -t $SESSION_NAME:1
 fi
