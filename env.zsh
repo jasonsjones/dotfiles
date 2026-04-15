@@ -1,6 +1,7 @@
-if [[ -f "$HOME/certificates/sfdx_bundle.pem" ]]
+CA_BUNDLE="$HOME/certificates/sfdx_bundle.pem"
+if [[ -f "$CA_BUNDLE" ]]
 then
-    export NODE_EXTRA_CA_CERTS=$HOME/certificates/sfdx_bundle.pem
+    export NODE_EXTRA_CA_CERTS=$CA_BUNDLE
 elif [[ -f "$HOME/.tls/tempCA/sfdc-dev-root.crt" ]]
 then
     export NODE_EXTRA_CA_CERTS=$HOME/.tls/tempCA/sfdc-dev-root.crt
