@@ -1,0 +1,3 @@
+# AI Suite CLI and aliases — added by path.d/ instead of .zshrc
+$HOME/.aisuite/bin
+$HOME/.aisuite/bin/aliases

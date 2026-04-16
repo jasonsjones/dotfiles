@@ -38,6 +38,10 @@ link_dotfiles () {
     ln -sf $PWD/config/alacritty $HOME/.config/alacritty
     ln -sf $PWD/config/zellij $HOME/.config/zellij
 
+    # path.d/ is referenced by path.zsh at its canonical location inside the
+    # dotfiles repo — no symlink needed, but ensure the directory exists.
+    mkdir -p $PWD/path.d
+
     echo "\nNeed to source ~/.zshrc. Run:"
     echo "\n   \$ source ~/.zshrc"
 

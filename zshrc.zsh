@@ -87,58 +87,15 @@ if [[ -f "$HOME/.bootstrap_rc" ]]; then
     source /Users/jasonjones/.bootstrap_rc
 fi
 
-# Put all configuration to construct $PATH here since this is the last config to be loaded when
-# an interactive shell is created.
-# Ref: https://0xmachos.com/2021-05-13-zsh-path-macos/
+# ── PATH ──────────────────────────────────────────────────────────────────────
+# All PATH logic lives in path.zsh. To add a new bin directory:
+#   • Permanent (version-controlled): add a *.path file to ~/dotfiles/path.d/
+#   • Permanent (personal/local):     run `path_add /some/dir`
+#   • Current session only:           run `path_prepend /some/dir`
 #
-# Personal Exports
-hostname=$(hostname)
-export VOLTA_HOME="$HOME/.volta"
-# export CC="/usr/bin/clang -std=c++17"
-COMMON_PATH=$VOLTA_HOME/bin:/opt/X11/bin:$HOME/blt:$HOME/bin
+# NOTE: tools that auto-inject `export PATH=...` into this file should be moved
+# to path.d/ and the injected lines removed. Run `path_show` to inspect.
+source $HOME/dotfiles/path.zsh
 
-# Update env vars whether or not we're runing on the mac studio (M1) or MBP
-if [[ "$hostname" == *wsm* || "$hostname"  == *ltmv7x4* ]]; then
-    export JAVA_HOME=/opt/workspace/core-public/tools/Darwin/jdk/$(get_java_home)
-
-    # configure homebrew dir for M1 mac first to override system binaries
-    export PATH=$COMMON_PATH:/opt/homebrew/bin:$JAVA_HOME/bin:$PATH
-
-    if [[ "$hostname" == *wsm* ]]; then
-        # configure CORE directory to point to core-on-git when running on mac studio
-        export CORE=$HOME/projects/git-core/core-public
-    else
-        export CORE=/opt/workspace/core-public
-    fi
-else
-    # configure homebrew dir for intel mac first to override system binaries
-    export JAVA_HOME=$(/usr/libexec/java_home)
-    export PATH=/usr/local/bin:$COMMON_PATH:$JAVA_HOME/bin:$PATH
-fi
-
-export PATH="$HOME/.local/bin:$PATH"
-
-# Added by Windsurf
-export PATH="/Users/jasonjones/.codeium/windsurf/bin:$PATH"
-
-
-
-# TODO: update the above re-export of $PATH with the existing logic above to determine if
-# we're on an M-chip or not.
-
-# export NODE_EXTRA_CA_CERTS="/Users/jasonjones/.claude/certs/salesforce-ca-bundle.pem"
-#
-# Note: for now, this cert is concatenated with others in a separate script located in
-# ~/scripts/sfdx-local-certs.zsh
-#
-
-
-
-# >>> aisuite >>>
-#export NODE_EXTRA_CA_CERTS="/Users/jasonjones/.aisuite/conf/npm-sfdc-certs.pem"
-#case ":$PATH:" in
-#  *":$HOME/.local/bin:"*) ;;
-#  *) [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH" ;;
-#esac
-#export PATH="/Users/jasonjones/.aisuite/bin:/Users/jasonjones/.aisuite/bin/aliases:$PATH"
-# <<< aisuite <<<
+# Deduplicate PATH after all sourcing (catches any tool-injected entries above)
+typeset -U path
