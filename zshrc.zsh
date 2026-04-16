@@ -99,3 +99,9 @@ source $HOME/dotfiles/path.zsh
 
 # Deduplicate PATH after all sourcing (catches any tool-injected entries above)
 typeset -U path
+
+# ── ENV (sourced last so our values win over anything bootstrap_rc set) ───────
+# env.zsh is also linked into $ZSH_CUSTOM so it loads for non-login shells,
+# but re-sourcing here guarantees it overrides tool install scripts that
+# clobber vars like NODE_EXTRA_CA_CERTS in .bootstrap_rc.
+source $HOME/dotfiles/env.zsh
