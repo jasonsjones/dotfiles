@@ -105,3 +105,6 @@ typeset -U path
 # but re-sourcing here guarantees it overrides tool install scripts that
 # clobber vars like NODE_EXTRA_CA_CERTS in .bootstrap_rc.
 source $HOME/dotfiles/env.zsh
+
+# >>> aisuite >>>
+# <<< aisuite <<<
