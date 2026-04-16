@@ -74,31 +74,9 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-get_java_home() {
-    # 1. Define the base directory
-    local base_dir="/opt/workspace/core-public/tools/Darwin/jdk"
-
-    # 2. Check if the directory exists to avoid errors
-    if [ ! -d "$base_dir" ]; then
-        echo "Error: Directory $base_dir not found."
-        return 1
-    fi
-
-    # 3. Find the most recently modified directory matching the pattern
-    # -d: List directory names, not their contents
-    # -t: Sort by modification time (newest first)
-    local latest_jdk
-    latest_jdk=$(ls -dt "$base_dir"/openjdk_*_aarch64 2>/dev/null | head -n 1)
-
-    # 4. Check if we actually found a match
-    if [ -z "$latest_jdk" ]; then
-        echo "No matching openjdk_*_aarch64 directories found."
-        return 1
-    fi
-
-    # 5. Return only the folder name (basename)
-    basename "$latest_jdk"
-}
+# Sourced here (rather than at the very end) because get_java_home is needed
+# for the JAVA_HOME / PATH setup below.
+source $HOME/dotfiles/functions.zsh
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -138,42 +116,6 @@ else
     export PATH=/usr/local/bin:$COMMON_PATH:$JAVA_HOME/bin:$PATH
 fi
 
-NOTES_DIR=$HOME/notes
-JOURNAL_HOME=$NOTES_DIR/areas/journal
-journal() {
-    cd $NOTES_DIR
-    year=$(date +%Y)
-    journal_file_name=$(date +%y%m%d_journal)
-    branch_name=$(date +%y%m%d-journal)
-    current_branch=$(git rev-parse --abbrev-ref HEAD)
-    journal_file_path=$JOURNAL_HOME/$year/$journal_file_name.md
-
-    # check if a git branch exist for this journal and switch to it
-    # otherwise, create it.
-    if git rev-parse --verify --quiet $branch_name > /dev/null; then
-        if [[ $current_branch != $branch_name ]]; then
-            git switch $branch_name
-        fi
-    else
-        git switch -c $branch_name
-    fi
-
-    if [[ ! -e "$journal_file_path" ]]; then
-        cp $JOURNAL_HOME/_template.md $journal_file_path
-        sed -i '' "s/{{Date}}/$(date +%m-%d-%Y)/g" $journal_file_path
-    fi
-    nvim $journal_file_path
-    cd - > /dev/null
-}
-
-find_commit_from_cl() {
-    git sfdc show-p4-sync-commit -c $1
-}
-
-show_commit_from_cl() {
-    git show $(git sfdc show-p4-sync-commit -c $1)
-}
-
 export PATH="$HOME/.local/bin:$PATH"
 
 # Added by Windsurf
@@ -192,163 +134,11 @@ export PATH="/Users/jasonjones/.codeium/windsurf/bin:$PATH"
 
 
 
-# Function to generate a # random_time.sh
-#
-# Generates a random time between 09:30:00 and 21:30:00.
-#
-# How it works:
-# 1. We calculate the start and end times in seconds since midnight.
-#    Start: 09:30:00 = 9*3600 + 30*60 = 34200 seconds
-#    End:   21:30:00 = 21*3600 + 30*60 = 77400 seconds
-# 2. The total range is 77400 - 34200 = 43200 seconds (exactly 12 hours).
-# 3. We use awk to:
-#    a. Seed its random number generator (`srand()`).
-#    b. Generate a random integer between 0 and 43200 (`int(rand() * 43201)`).
-#    c. Add this to our start time (34200) to get a random timestamp.
-#    d. Format this timestamp as HH:MM:SS using `strftime("%T", ...)`.random time between 09:30:00 and 21:30:00
-# Function to generate a random time between 09:30:00 and 21:30:00 (macOS/BSD compatible)
-# This is a dependency for the next function.
-random_time() {
-  awk 'BEGIN {
-    srand()
-    total_seconds = int(rand() * 43201) + 34200
-    hours = int(total_seconds / 3600)
-    minutes = int((total_seconds % 3600) / 60)
-    seconds = total_seconds % 60
-    printf "%02d:%02d:%02d\n", hours, minutes, seconds
-  }'
-}
-
-# Creates a full Git-compatible date string
-# Usage: git_random_date MM/DD/YY
-git_random_date() {
-  # Check if a date argument was provided
-  if [ -z "$1" ]; then
-    echo "Usage: git_random_date MM/DD/YY"
-    return 1 # Exit with an error
-  fi
-
-  local input_date="$1"
-
-  # 1. Parse the input date and format it, including the correct
-  #    timezone offset *for that specific date*.
-  #    -j : "do not try to set the date"
-  #    -f : "specify the input format"
-  #    +%a %b %d %Y %z : "output as: <Day> <Mon> <DayNum> <Year> <Offset>"
-  local date_and_tz_part
-  date_and_tz_part=$(date -j -f "%m/%d/%y" "$input_date" "+%a %b %d %Y %z" 2>/dev/null)
-
-  # Error handling for bad date input
-  if [ -z "$date_and_tz_part" ]; then
-     echo "Error: Invalid date format. Please use MM/DD/YY (e.g., 08/07/25)"
-     return 1
-  fi
-
-  # 2. Get the random time from our other function
-  local time_part
-  time_part=$(random_time)
-
-  # 3. Separate the date and timezone parts from the formatted string.
-  #    The string is "Thu Aug 07 2025 -0700"
-  #    This gets everything *except* the last part: "Thu Aug 07 2025"
-  local date_part="${date_and_tz_part% *}"
-  #    This gets *only* the last part: "-0700"
-  local tz_part="${date_and_tz_part##* }"
-
-  # 4. Echo the final, assembled string
-  echo "$date_part $time_part $tz_part"
-}
-
-# A custom "git commit" wrapper for random-time dates
-#
-# Usage:
-#   git-commit-rand -m "My message"           (for today)
-#   git-commit-rand -m "My message" 08/07/25  (for specific date)
-#
-git-commit-rand() {
-  local commit_msg
-  local date_arg
-
-  # Simple argument parsing: find the -m "message"
-  if [ "$1" = "-m" ] && [ -n "$2" ]; then
-    commit_msg="$2"
-    # Get the optional date (it's $3)
-    date_arg="$3"
-  else
-    echo "Usage: git-commit-rand -m \"<message>\" [MM/DD/YY]"
-    return 1
-  fi
-
-  local date_str
-  # Check if a date was provided to our function
-  if [ -n "$date_arg" ]; then
-    date_str=$(git_random_date "$date_arg")
-  else
-    date_str=$(git_random_date) # No date arg, so git_random_date will use today's
-  fi
-
-  # Check if git_random_date gave an error
-  if [ -z "$date_str" ]; then
-    echo "Date generation failed."
-    return 1
-  fi
-
-  # --- The Final Command ---
-  echo "Running: git commit -m \"$commit_msg\" --date=\"$date_str\""
-  git commit -m "$commit_msg" --date="$date_str"
-}
-
-#alias git='f() { if [ "$1" = "commit-rand" ]; then shift; git-commit-rand "$@"; else command git "$@"; fi }; f'
-
-# Function to automate GitHub EMU repo setup
-# Usage: gclone_emu <repo-name>
-gitclone_emu() {
-    # Check if a repo name was provided
-    if [ -z "$1" ]; then
-        echo "Error: Please provide a repository name."
-        echo "Usage: gitclone_emu adk-experts-lwc"
-        return 1
-    fi
-
-    local REPO_NAME=$1
-    local TARGET_DIR=~/projects/git-emu
-    local START_DIR=$(pwd)
-
-    # Define your specific EMU namespaces
-    local MY_EMU_USER="jasonjones_sfemu"
-    local ORG_EMU_NAME="salesforce-experience-platform-emu"
-    local SSH_ALIAS="sfdc_emu"
-
-    # Check if the directory already exists
-    if [ -d "$FULL_PATH" ]; then
-        echo "Error: Directory '$FULL_PATH' already exists."
-        echo "Aborting to prevent overwriting or duplicate configuration."
-        # Navigate there anyway if you want to be helpful
-        cd "$FULL_PATH"
-        return 1
-    fi
-
-    # Navigate to your projects folder
-    cd "$TARGET_DIR" || { echo "Directory $TARGET_DIR not found"; return 1; }
-
-    echo "--- Cloning $REPO_NAME from $MY_EMU_USER ---"
-
-    # Clone your fork
-    git clone git@$SSH_ALIAS:$MY_EMU_USER/$REPO_NAME.git
-
-    # Enter the new directory
-    cd "$REPO_NAME" || return 1
-
-    echo "--- Adding upstream remote: $ORG_EMU_NAME ---"
-
-    # Add the upstream remote pointing to the source org
-    git remote add upstream git@$SSH_ALIAS:$ORG_EMU_NAME/$REPO_NAME.git
-
-    echo "--- Setup Complete in $(pwd)! ---"
-    git remote -v
-
-    # OPTIONAL: Uncomment the line below if you want to automatically
-    # return to your original directory instead of staying in the repo.
-    cd "$START_DIR"
-}
-
+# >>> aisuite >>>
+#export NODE_EXTRA_CA_CERTS="/Users/jasonjones/.aisuite/conf/npm-sfdc-certs.pem"
+#case ":$PATH:" in
+#  *":$HOME/.local/bin:"*) ;;
+#  *) [ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH" ;;
+#esac
+#export PATH="/Users/jasonjones/.aisuite/bin:/Users/jasonjones/.aisuite/bin/aliases:$PATH"
+# <<< aisuite <<<
