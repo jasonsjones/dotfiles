@@ -1,12 +1,13 @@
 # NODE_EXTRA_CA_CERTS: point at a single bundle so individual apps can't hijack
 # this var by installing only their own cert.  To add a new cert source, edit
 # bin/cert-bundle.sh and re-run it; the path below never needs to change.
-CA_BUNDLE="$HOME/certificates/ca_bundle.pem"
-if [[ -f "$CA_BUNDLE" ]]; then
-    export NODE_EXTRA_CA_CERTS="$CA_BUNDLE"
-elif [[ -f "$HOME/.tls/tempCA/sfdc-dev-root.crt" ]]; then
-    export NODE_EXTRA_CA_CERTS="$HOME/.tls/tempCA/sfdc-dev-root.crt"
-fi
+#CA_BUNDLE="$HOME/certificates/ca_bundle.pem"
+#if [[ -f "$CA_BUNDLE" ]]; then
+#    export NODE_EXTRA_CA_CERTS="$CA_BUNDLE"
+#elif [[ -f "$HOME/.tls/tempCA/sfdc-dev-root.crt" ]]; then
+#    export NODE_EXTRA_CA_CERTS="$HOME/.tls/tempCA/sfdc-dev-root.crt"
+#fi
+export NODE_EXTRA_CA_CERTS="/Users/jasonjones/.aisuite/conf/npm-sfdc-certs.pem"
 
 export LEDGER="$HOME/ledgers/master_ledger.ldg"
 export EDITOR='nvim'
