@@ -15,7 +15,7 @@ autocmd("TextYankPost", {
     group = HighlightGroup,
     pattern = "*",
     callback = function()
-        vim.highlight.on_yank()
+        (vim.hl or vim.highlight).on_yank()
     end,
 })
 
@@ -26,13 +26,13 @@ autocmd({ "BufEnter", "BufWinEnter" }, {
     pattern = "*.md",
     callback = function()
         vim.cmd("silent! loadview")
-        vim.opt.wrap = true
-        vim.opt.linebreak = true
-        vim.opt.list = false
+        vim.opt_local.wrap = true
+        vim.opt_local.linebreak = true
+        vim.opt_local.list = false
         -- Set up folding for markdown
-        vim.opt.foldmethod = "expr"
-        vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-        vim.opt.foldlevel = 99
+        vim.opt_local.foldmethod = "expr"
+        vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+        vim.opt_local.foldlevel = 99
         -- Customize fold appearance using Tokyo Night colors
         vim.cmd([[highlight Folded guifg=#7aa2f7 guibg=#24283b]])
         vim.cmd([[highlight FoldColumn guifg=#7aa2f7 guibg=#1a1b26]])
@@ -44,9 +44,6 @@ autocmd("BufWinLeave", {
     pattern = "*.md",
     callback = function()
         vim.cmd("mkview")
-        vim.opt.wrap = false
-        vim.opt.linebreak = false
-        vim.opt.list = true
     end,
 })
 
@@ -55,7 +52,9 @@ autocmd("VimEnter", {
     group = ZellijIntegration,
     pattern = "*",
     callback = function()
-        vim.fn.system({ "zellij", "action", "switch-mode", "locked" })
+        if vim.env.ZELLIJ ~= nil then
+            vim.fn.system({ "zellij", "action", "switch-mode", "locked" })
+        end
     end,
 })
 

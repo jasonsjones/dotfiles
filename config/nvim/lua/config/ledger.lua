@@ -1,6 +1,7 @@
 local M = {}
 
 local NAMESPACE = "ledger_info"
+local namespace_id = vim.api.nvim_create_namespace(NAMESPACE)
 
 local RegEx = {
     EMPTY_LINE = "^$",
@@ -43,7 +44,6 @@ end
 
 local function show_virtual_text(line_num, total_amount, cumulative_amount)
     local bufnr = vim.fn.bufnr()
-    local namespace_id = vim.api.nvim_create_namespace(NAMESPACE)
     local col_num = 0
     local amount_remaining = math.abs(total_amount - cumulative_amount)
 
@@ -83,6 +83,8 @@ end
 
 -- Generate useful information for the current transaction
 function M.generate_transaction_info()
+    vim.api.nvim_buf_clear_namespace(0, namespace_id, 0, -1)
+
     local start_line, end_line = get_transaction_boundaries()
     local line_for_display = start_line
     local total_amount = 0.00

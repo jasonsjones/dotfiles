@@ -83,7 +83,7 @@ vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.list = true
 
 -- Characters for displaying in list mode
-vim.opt.listchars = { tab = "▸\\", trail = "•" }
+vim.opt.listchars = { tab = "▸ ", trail = "•" }
 
 -- Allow specified keys to cross line boundaries
 vim.opt.whichwrap:append("<,>,[,],h,l")
