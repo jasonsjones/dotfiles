@@ -79,9 +79,9 @@ path_prepend "$VOLTA_HOME/bin"
 
 if $_IS_ARM64; then
     if [[ "$(hostname)" == *wsm* ]]; then
-        export CORE="$HOME/projects/git-core/core-public"
+        export CORE="$HOME/projects/git-core/core-public/core"
     else
-        export CORE="/opt/workspace/core-public"
+        export CORE="/opt/workspace/core-public/core"
     fi
 fi
 
