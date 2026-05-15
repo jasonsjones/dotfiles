@@ -15,8 +15,8 @@ if [ $? != 0 ]; then
     tmux rename-window "scratch"
     tmux send-key "cd" C-m
 
-    # Window: git soma projects
-    tmux new-window -n "webruntime" -c $GIT_SOMA_DIR/webruntime
+    # Window: webruntime project
+    tmux new-window -n "webruntime" -c /opt/workspace/webruntime
 
     # Window: sf projects
     tmux new-window -n "sf projects" -c $SFDX_PROJ_DIR
