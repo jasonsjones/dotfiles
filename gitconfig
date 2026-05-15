@@ -43,3 +43,15 @@
     line-numbers-minus-style = 124
     line-numbers-plus-style = 28
 
+[credential "https://git.soma.salesforce.com"]
+	helper = 
+	helper = !/Users/jasonjones/.aisuite/bin/gh auth git-credential
+[credential "https://gitcore.soma.salesforce.com"]
+	helper = 
+	helper = !/Users/jasonjones/.aisuite/bin/gh auth git-credential
+[credential "https://github.com"]
+	helper = 
+	helper = !/Users/jasonjones/.aisuite/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/Users/jasonjones/.aisuite/bin/gh auth git-credential
