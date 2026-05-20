@@ -1,4 +1,9 @@
 get_java_home() {
+    # Picks the newest JDK 21 dir under core-public/tools/Darwin/jdk that has a
+    # working bin/java. Core's bazel toolchain pins onejdk_21 (see
+    # core/.bazelrc and tools/build/bazel/sfdc/java/toolchains.bzl), so we
+    # match both naming schemes the build uses: openjdk_21.* and
+    # sfdc-jdk-zulu-21.*. Empty/half-populated dirs are skipped.
     local base_dir="/opt/workspace/core-public/tools/Darwin/jdk"
 
     if [ ! -d "$base_dir" ]; then
@@ -6,15 +11,16 @@ get_java_home() {
         return 1
     fi
 
-    local latest_jdk
-    latest_jdk=$(ls -dt "$base_dir"/openjdk_*_aarch64 2>/dev/null | head -n 1)
+    local d
+    for d in $(ls -dt "$base_dir"/openjdk_21.*_aarch64 "$base_dir"/sfdc-jdk-zulu-21.*_aarch64 2>/dev/null); do
+        if [ -x "$d/bin/java" ]; then
+            basename "$d"
+            return 0
+        fi
+    done
 
-    if [ -z "$latest_jdk" ]; then
-        echo "No matching openjdk_*_aarch64 directories found."
-        return 1
-    fi
-
-    basename "$latest_jdk"
+    echo "No usable JDK 21 found in $base_dir."
+    return 1
 }
 
 # Opens today's journal entry in nvim, creating it from a template if needed.
