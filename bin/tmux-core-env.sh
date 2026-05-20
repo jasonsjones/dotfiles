@@ -27,6 +27,9 @@ if [ $? != 0 ]; then
     # Window: git chores
     tmux new-window -n "git chores" -c $GIT_CORE_DIR
 
+    # Window: claude sessions
+    tmux new-window -n "claude" -c $GIT_CORE_DIR
+
     tmux select-window -t $SESSION_NAME:1
 fi
 
