@@ -105,3 +105,14 @@ typeset -U path
 # but re-sourcing here guarantees it overrides tool install scripts that
 # clobber vars like NODE_EXTRA_CA_CERTS in .bootstrap_rc.
 source $HOME/dotfiles/env.zsh
+
+# --- LWR local-core build (Perforce stopgap) ---
+# Perforce accounts are unavailable, so nucleus-core-packager can't fetch Core's
+# pom via `p4 print`. The shim at ~/.local/bin/lwr-p4-shim feeds it a stub pom
+# (real spring/utam versions) so the packager's pom step succeeds. The generated
+# pom is unused by the override_repository flow, so this is safe.
+# REMOVE the PATH prefix below once real p4 accounts are restored.
+lwr-build() {
+  PATH="$HOME/.local/bin/lwr-p4-shim:$PATH" yarn local-core:build "$@"
+}
+# --- end LWR local-core build ---
