@@ -40,12 +40,10 @@ EOF
 
 session_off_core() {
     sfdx_dir="$HOME/projects/sf-projects"
-    emu_dir="$HOME/projects/git-emu"
     cat <<EOF
 scratch||cd
 webruntime|/opt/workspace/webruntime|
 sf projects|$sfdx_dir|
-webapps|$emu_dir/webapps|
 EOF
 }
 
