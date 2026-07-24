@@ -116,3 +116,17 @@ lwr-build() {
   PATH="$HOME/.local/bin/lwr-p4-shim:$PATH" yarn local-core:build "$@"
 }
 # --- end LWR local-core build ---
+
+# ─── TAMPER SENTINEL — nothing should live below this line ──────────────────
+# Third-party installers love to `echo 'export PATH=...' >> ~/.zshrc` (and the
+# same for NODE_EXTRA_CA_CERTS). ~/.zshrc is chflags'd immutable to reject those
+# writes outright, but if one slips through (e.g. after an intentional edit left
+# the flag off), anything appended lands *below* this sentinel. This check warns
+# at shell start so injected config is visible, not silent. To recover:
+#   zshrc-check   # show what was injected below the sentinel
+#   zshrc-heal    # relocate PATH→path.d/, env vars→env.zsh, truncate back
+# ${(%):-%N} is the path of the current script (the symlink target).
+if [[ "$(tail -1 ${(%):-%N} 2>/dev/null)" != *"### END OF ZSHRC — DO NOT APPEND ###"* ]]; then
+    print -P "%F{yellow}⚠ ~/.zshrc: content was appended below the sentinel — run: zshrc-check%f"
+fi
+### END OF ZSHRC — DO NOT APPEND ###

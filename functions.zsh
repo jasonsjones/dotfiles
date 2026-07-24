@@ -1,3 +1,97 @@
+# ── zshrc tamper detection / healing ──────────────────────────────────────────
+# Third-party installers append `export PATH=...` / `export NODE_EXTRA_CA_CERTS=...`
+# to ~/.zshrc as if they own it. The real config lives in dotfiles/zshrc.zsh (the
+# symlink target) and ends with a sentinel line. Anything below the sentinel was
+# injected. zshrc-check surfaces it; zshrc-heal relocates it and truncates back.
+
+_ZSHRC_SENTINEL='### END OF ZSHRC — DO NOT APPEND ###'
+# Resolve the real file behind the ~/.zshrc symlink (that's what gets sourced,
+# and what an installer targeting "$HOME/.zshrc" actually writes through).
+_zshrc_file() { local f="$HOME/.zshrc"; [[ -L "$f" ]] && f="$(readlink "$f")"; print -r -- "$f"; }
+
+# Show any lines appended below the sentinel (i.e. injected by some tool).
+zshrc-check() {
+    local f; f="$(_zshrc_file)"
+    if ! grep -qF "$_ZSHRC_SENTINEL" "$f"; then
+        print -P "%F{red}No sentinel found in $f — did the file get rewritten?%f"
+        return 2
+    fi
+    local injected
+    injected="$(awk -v s="$_ZSHRC_SENTINEL" 'found{print} $0==s{found=1}' "$f")"
+    if [[ -z "${injected//[$'\n\t ']/}" ]]; then
+        print -P "%F{green}✓ Clean — nothing appended below the sentinel.%f"
+        return 0
+    fi
+    print -P "%F{yellow}Injected below sentinel in $f:%f"
+    print -r -- "$injected"
+    return 1
+}
+
+# Relocate injected lines to their proper homes and truncate the file back to
+# the sentinel. PATH dirs → path.d/injected.path; env exports → env.zsh; anything
+# unrecognized is left in place and reported so it can be handled by hand.
+zshrc-heal() {
+    local f; f="$(_zshrc_file)"
+    local dotfiles="${DOTFILES:-$HOME/dotfiles}"
+    if ! grep -qF "$_ZSHRC_SENTINEL" "$f"; then
+        print -P "%F{red}No sentinel in $f — refusing to heal a file I don't recognize.%f"
+        return 2
+    fi
+
+    local injected
+    injected="$(awk -v s="$_ZSHRC_SENTINEL" 'found{print} $0==s{found=1}' "$f")"
+    if [[ -z "${injected//[$'\n\t ']/}" ]]; then
+        print -P "%F{green}✓ Already clean — nothing to heal.%f"
+        return 0
+    fi
+
+    # If the real file is immutable, temporarily clear the flag so we can rewrite.
+    local was_locked=false
+    if ls -lO "$f" 2>/dev/null | grep -q uchg; then
+        was_locked=true
+        chflags nouchg "$f"
+    fi
+
+    local pathfile="$dotfiles/path.d/injected.path"
+    local unhandled="" line
+    while IFS= read -r line; do
+        [[ -z "${line//[$'\n\t ']/}" ]] && continue      # skip blanks
+        [[ "$line" == \#* ]] && continue                  # skip comments
+        if [[ "$line" == *NODE_EXTRA_CA_CERTS* ]]; then
+            print -P "%F{yellow}↷ NODE_EXTRA_CA_CERTS injection dropped (env.zsh already pins it):%f\n    $line"
+        elif [[ "$line" == *"export PATH="* || "$line" == *"PATH=\""*"\$PATH"* ]]; then
+            # Pull out dirs added ahead of $PATH and persist each to path.d/.
+            local rhs="${line#*PATH=}"; rhs="${rhs%%\$PATH*}"
+            rhs="${rhs//\"/}"; rhs="${rhs//\'/}"; rhs="${rhs%:}"
+            local d
+            for d in ${(s.:.)rhs}; do
+                [[ -z "$d" || "$d" == '$PATH' ]] && continue
+                if ! grep -qxF "$d" "$pathfile" 2>/dev/null; then
+                    print -r -- "$d" >> "$pathfile"
+                    print -P "%F{green}→ PATH dir moved to path.d/injected.path:%f $d"
+                fi
+            done
+        elif [[ "$line" == export\ * ]]; then
+            print -r -- "$line" >> "$dotfiles/env.zsh"
+            print -P "%F{green}→ env export moved to env.zsh:%f $line"
+        else
+            unhandled+="$line"$'\n'
+        fi
+    done <<< "$injected"
+
+    # Truncate the file to everything up to and including the sentinel.
+    local tmp; tmp="$(mktemp)"
+    awk -v s="$_ZSHRC_SENTINEL" '{print} $0==s{exit}' "$f" > "$tmp" && mv "$tmp" "$f"
+
+    if [[ -n "${unhandled//[$'\n\t ']/}" ]]; then
+        print -P "%F{yellow}⚠ Could not classify these lines — handle manually:%f"
+        print -r -- "$unhandled"
+    fi
+
+    $was_locked && chflags uchg "$f"
+    print -P "%F{green}✓ Healed. Re-source with: source ~/.zshrc%f"
+}
+
 get_java_home() {
     # Picks the newest JDK 21 dir under core-public/tools/Darwin/jdk that has a
     # working bin/java. Core's bazel toolchain pins onejdk_21 (see
