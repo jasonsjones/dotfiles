@@ -42,6 +42,12 @@ link_dotfiles () {
     # dotfiles repo — no symlink needed, but ensure the directory exists.
     mkdir -p $PWD/path.d
 
+    # Make zshrc.zsh immutable so third-party installers can't append
+    # `export PATH=...` / `export NODE_EXTRA_CA_CERTS=...` to it. See CLAUDE.md
+    # ("zshrc.zsh is immutable") for how to edit it and how to recover if a
+    # write slips through (zshrc-check / zshrc-heal).
+    chflags uchg $PWD/zshrc.zsh
+
     echo "\nNeed to source ~/.zshrc. Run:"
     echo "\n   \$ source ~/.zshrc"
 
