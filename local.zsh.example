@@ -1,0 +1,8 @@
+# Optional machine-specific shell configuration.
+#
+# Copy this file to local.zsh for values that should not be shared between
+# machines, such as temporary PATH entries, credentials, or local overrides.
+# local.zsh is sourced after env.zsh and is intentionally ignored by Git.
+
+# export CORE_WORKSPACE="$HOME/projects/core-public"
+# export NODE_EXTRA_CA_CERTS="$HOME/.aisuite/conf/npm-sfdc-certs.pem"
