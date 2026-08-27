@@ -55,19 +55,29 @@ notes||cd $HOME/notes
 EOF
 }
 
+session_second_brains() {
+    brains_dir="$HOME/projects/second-brains"
+    cat <<EOF
+arc lwr|$brains_dir/arc-lwr-second-brain|
+arc aura|$brains_dir/arc-aura-second-brain|
+arc trust|$brains_dir/arc-trust-second-brain|
+EOF
+}
+
 # ----- session registry ------------------------------------------------------
 
 # Add new sessions here. Keep the list and the dispatcher in sync.
-SESSION_NAMES="on-core off-core sandbox"
+SESSION_NAMES="sandbox on-core off-core second-brains"
 
 # Default attach target when `all` is invoked without --attach.
 ALL_DEFAULT_ATTACH="sandbox"
 
 dispatch() {
     case "$1" in
+        sandbox)  session_sandbox ;;
         on-core)  session_on_core ;;
         off-core) session_off_core ;;
-        sandbox)  session_sandbox ;;
+        second-brains) session_second_brains ;;
         *)        return 1 ;;
     esac
 }
@@ -98,7 +108,24 @@ build_session() {
     # half-built session behind.
     windows="$(dispatch "$session_name")"
 
-    tmux -2 new-session -d -s "$session_name"
+    # Start the session in the first window's directory so window 1 lands in
+    # the right place (new-session has no per-window -c fix-up below).
+    first_dir=""
+    while IFS='|' read -r _name _start_dir _init_cmd; do
+        case "$_name" in
+            ''|\#*) continue ;;
+        esac
+        first_dir="$_start_dir"
+        break
+    done <<EOF
+$windows
+EOF
+
+    if [ -n "$first_dir" ]; then
+        tmux -2 new-session -d -s "$session_name" -c "$first_dir"
+    else
+        tmux -2 new-session -d -s "$session_name"
+    fi
 
     # Honor whatever base-index the user has configured (commonly 1).
     base_index="$(tmux show-options -gv base-index 2>/dev/null || echo 0)"
