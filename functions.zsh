@@ -98,7 +98,7 @@ get_java_home() {
     # core/.bazelrc and tools/build/bazel/sfdc/java/toolchains.bzl), so we
     # match both naming schemes the build uses: openjdk_21.* and
     # sfdc-jdk-zulu-21.*. Empty/half-populated dirs are skipped.
-    local base_dir="/opt/workspace/core-public/tools/Darwin/jdk"
+    local base_dir="${CORE_WORKSPACE:-/opt/workspace/core-public}/tools/Darwin/jdk"
 
     if [ ! -d "$base_dir" ]; then
         echo "Error: Directory $base_dir not found."

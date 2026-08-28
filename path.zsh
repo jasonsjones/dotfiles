@@ -59,7 +59,7 @@ path_prepend "$HOMEBREW_PREFIX/bin"
 
 if $_IS_ARM64; then
     # get_java_home is defined in functions.zsh (must be sourced before path.zsh)
-    _jdk_dir="/opt/workspace/core-public/tools/Darwin/jdk/$(get_java_home 2>/dev/null)"
+    _jdk_dir="${CORE_WORKSPACE:-/opt/workspace/core-public}/tools/Darwin/jdk/$(get_java_home 2>/dev/null)"
     [[ -d "$_jdk_dir" ]] && export JAVA_HOME="$_jdk_dir"
     unset _jdk_dir
 fi
@@ -74,15 +74,11 @@ export VOLTA_HOME="$HOME/.volta"
 path_prepend "$VOLTA_HOME/bin"
 
 # ── Salesforce CORE workspace ─────────────────────────────────────────────────
-# The CORE path differs between the Mac Studio (wsm) and the standard M-chip
-# dev laptop; Intel machines don't use the internal JDK tree at all.
+# Set CORE only when the standard Salesforce workspace checkout is available.
+# Set CORE_WORKSPACE in local.zsh if a machine uses a different checkout path.
 
-if $_IS_ARM64; then
-    if [[ "$(hostname)" == *wsm* ]]; then
-        export CORE="$HOME/projects/git-core/core-public/core"
-    else
-        export CORE="/opt/workspace/core-public/core"
-    fi
+if [[ -d "${CORE_WORKSPACE:-/opt/workspace/core-public}/core" ]]; then
+    export CORE="${CORE_WORKSPACE:-/opt/workspace/core-public}/core"
 fi
 
 # ── Personal bin dirs ─────────────────────────────────────────────────────────

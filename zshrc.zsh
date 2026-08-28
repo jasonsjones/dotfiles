@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/jasonjones/.oh-my-zsh
+export DOTFILES="${DOTFILES:-${${(%):-%N}:A:h}}"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -63,7 +64,9 @@ if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
-source $ZSH/oh-my-zsh.sh
+if [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
+    source "$ZSH/oh-my-zsh.sh"
+fi
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -76,7 +79,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Sourced here (rather than at the very end) because get_java_home is needed
 # for the JAVA_HOME / PATH setup below.
-source $HOME/dotfiles/functions.zsh
+source "$DOTFILES/functions.zsh"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -84,7 +87,7 @@ source $HOME/dotfiles/functions.zsh
 # For a full list of active aliases, run `alias`.
 
 if [[ -f "$HOME/.bootstrap_rc" ]]; then
-    source /Users/jasonjones/.bootstrap_rc
+    source "$HOME/.bootstrap_rc"
 fi
 
 # ── PATH ──────────────────────────────────────────────────────────────────────
@@ -95,7 +98,7 @@ fi
 #
 # NOTE: tools that auto-inject `export PATH=...` into this file should be moved
 # to path.d/ and the injected lines removed. Run `path_show` to inspect.
-source $HOME/dotfiles/path.zsh
+source "$DOTFILES/path.zsh"
 
 # Deduplicate PATH after all sourcing (catches any tool-injected entries above)
 typeset -U path
@@ -104,7 +107,13 @@ typeset -U path
 # env.zsh is also linked into $ZSH_CUSTOM so it loads for non-login shells,
 # but re-sourcing here guarantees it overrides tool install scripts that
 # clobber vars like NODE_EXTRA_CA_CERTS in .bootstrap_rc.
-source $HOME/dotfiles/env.zsh
+source "$DOTFILES/env.zsh"
+
+# Optional local overrides are deliberately sourced last and ignored by Git.
+# Copy local.zsh.example to local.zsh to add machine-specific configuration.
+if [[ -f "$DOTFILES/local.zsh" ]]; then
+    source "$DOTFILES/local.zsh"
+fi
 
 # --- LWR local-core build (Perforce stopgap) ---
 # Perforce accounts are unavailable, so nucleus-core-packager can't fetch Core's
