@@ -19,6 +19,7 @@ $HOME/.mytool/bin
 |---|---|
 | `windsurf.path` | Windsurf / Codeium editor |
 | `aisuite.path` | Salesforce AI Suite CLI |
+| `mhtc-telemetry.path` | AI Suite telemetry collector (opencode shim) |
 | `custom.path` | Created by `path_add` for interactive additions |
 
 ## Helper commands (available in any shell)

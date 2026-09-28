@@ -1,0 +1,3 @@
+# AI Suite telemetry collector — opencode shim; must precede aisuite.path
+# (path.d files load alphabetically and each prepends, so this one wins)
+$HOME/.mh-telemetry-collector-aisuite/telemetry/opencode-shim
