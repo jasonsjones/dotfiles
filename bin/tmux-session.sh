@@ -39,11 +39,11 @@ EOF
 }
 
 session_off_core() {
-    sfdx_dir="$HOME/projects/sf-projects"
+    projects_dir="$HOME/projects"
     cat <<EOF
 scratch||cd
-webruntime|/opt/workspace/webruntime|
-sf projects|$sfdx_dir|
+sf projects|$projects_dir/sf-projects|
+perf harness|$projects_dir/git-emu/ai-perf|
 EOF
 }
 
