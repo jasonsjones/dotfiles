@@ -111,3 +111,9 @@ if [[ -d "$_path_d" ]]; then
     unset _f _p
 fi
 unset _path_d _IS_ARM64
+
+# ── npm global executables ────────────────────────────────────────────────────
+# Resolve this after the drop-ins so it matches the npm selected for this shell.
+if (( $+commands[npm] )); then
+    path_prepend "$(npm prefix -g 2>/dev/null)/bin"
+fi
