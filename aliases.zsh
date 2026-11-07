@@ -34,3 +34,5 @@ alias dbsync="bazel build //db/tools/... && bazel run //:db-schema-update"
 #alias notes="code --new-window ~/Documents/notes"
 #alias scratchpad="code --new-window ~/Documents/notes ~/Documents/notes/scratch.md"
 
+alias core-stop='pkill -TERM -f "[l]auncher[.]OsgiLauncher"'
+alias core-status='pgrep -f "[l]auncher[.]OsgiLauncher"'
