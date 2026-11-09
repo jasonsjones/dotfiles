@@ -10,6 +10,7 @@ fi
 
 export LEDGER="$HOME/ledgers/master_ledger.ldg"
 export EDITOR='nvim'
+export DEVBAR_FASTCONTEXT_MODEL=gemini-3.5-flash
 export GPG_TTY=$(tty)
 export ICLOUD_DRIVE_LOCATION=~/Library/Mobile\ Documents/com\~apple\~CloudDocs
 export SPACESHIP_PACKAGE_SYMBOL="📦 "
